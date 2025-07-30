@@ -32,9 +32,9 @@ export default function Home() {
     <div>
       <Navbar/>
       <Carousel slides={[
-        { image: "", title: "صورة 1" },
-        { image: "", title: "صورة 2" },
-        { image: "", title: "صورة 3" }
+        { image: "/images/mastercard.png", title: "MasterCard" },
+        { image: "/images/instapay.png", title: "InstaPay" },
+        { image: "/images/visa.png", title: "Visa" }
       ]}/>
       <CategoriesCarousel 
         onCategorySelect={handleCategorySelect}
