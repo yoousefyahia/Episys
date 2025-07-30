@@ -3,43 +3,54 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../Navbar/Navbar.css";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useCart } from "@/contexts/CartContext";
 
 const LOCATIONS = [
-  { name: "Degla" },
-  { name: "Nasr City" },
-  { name: "Alexandria" },
+  { name: "degla" },
+  { name: "nasrCity" },
+  { name: "alexandria" },
 ];
 
 function Navbar() {
+  const { language, changeLanguage, t } = useLanguage();
+  const { getCartCount } = useCart();
   const [selectedLocation, setSelectedLocation] = useState(LOCATIONS[0].name);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const dropdownRef = useRef(null);
   const drawerRef = useRef(null);
 
-  // Close dropdown when clicking outside
+  const scrollToFooter = () => {
+    document.querySelector('footer').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToFooterAndCloseDrawer = () => {
+    scrollToFooter();
+    setDrawerOpen(false);
+  };
+
+  const goToHome = () => {
+    window.location.href = '/';
+  };
+
+  const goToHomeAndCloseDrawer = () => {
+    goToHome();
+    setDrawerOpen(false);
+  };
+
+  // Close dropdown and drawer when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
+      // Close dropdown
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target)
       ) {
         setDropdownOpen(false);
       }
-    }
-    if (dropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dropdownOpen]);
-
-  // Close drawer when clicking outside (mobile menu)
-  useEffect(() => {
-    function handleDrawerClick(event) {
+      
+      // Close drawer
       if (
         drawerRef.current &&
         !drawerRef.current.contains(event.target) &&
@@ -48,15 +59,17 @@ function Navbar() {
         setDrawerOpen(false);
       }
     }
-    if (drawerOpen) {
-      document.addEventListener("mousedown", handleDrawerClick);
+    
+    if (dropdownOpen || drawerOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener("mousedown", handleDrawerClick);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
+    
     return () => {
-      document.removeEventListener("mousedown", handleDrawerClick);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [drawerOpen]);
+  }, [dropdownOpen, drawerOpen]);
 
   return (
     <>
@@ -71,7 +84,7 @@ function Navbar() {
             onClick={() => setDropdownOpen((open) => !open)}
           >
             <span className="navbar__location-icon">📍</span>
-            {selectedLocation}
+            {t(selectedLocation)}
             <span className="navbar__dropdown">▼</span>
           </button>
           {dropdownOpen && (
@@ -88,29 +101,33 @@ function Navbar() {
                   }}
                 >
                   <span className="navbar__location-icon">📍</span>
-                  {loc.name}
+                  {t(loc.name)}
                 </button>
               ))}
             </div>
           )}
         </div>
         <ul className="navbar__links navbar__hide-mobile">
-          <li>Home</li>
-          <li>Book Table</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
+          <li onClick={goToHome} style={{ cursor: 'pointer' }}>{t('home')}</li>
+          <li onClick={() => window.location.href = '/book-table'} style={{ cursor: 'pointer' }}>{t('bookTable')}</li>
+          <li onClick={() => window.location.href = '/about-us'} style={{ cursor: 'pointer' }}>{t('aboutUs')}</li>
+          <li onClick={() => window.location.href = '/contact-us'} style={{ cursor: 'pointer' }}>{t('contactUs')}</li>
         </ul>
         <div className="navbar__actions navbar__hide-mobile">
-          <select className="navbar__lang-select">
-            <option>English</option>
-            <option>Arabic</option>
+          <select 
+            className="navbar__lang-select"
+            value={language}
+            onChange={(e) => changeLanguage(e.target.value)}
+          >
+            <option value="en">{t('english')}</option>
+            <option value="ar">{t('arabic')}</option>
           </select>
-          <button className="navbar__call-waiter">
-            <span className="navbar__bell">🔔</span> Call Waiter
+          <button className="navbar__call-waiter" onClick={() => window.location.href = '/call-waiter'}>
+            <span className="navbar__bell">🔔</span> {t('callWaiter')}
           </button>
-          <div className="navbar__cart">
+          <div className="navbar__cart" onClick={() => window.location.href = '/cart'}>
             <span className="navbar__cart-icon">🛒</span>
-            <span className="navbar__cart-badge">0</span>
+            <span className="navbar__cart-badge">{getCartCount()}</span>
           </div>
         </div>
         {/* Hamburger icon for mobile */}
@@ -140,10 +157,23 @@ function Navbar() {
               </button>
             </div>
             <ul className="navbar__drawer-links">
-              <li>Home</li>
-              <li>Book Table</li>
-              <li>About Us</li>
-              <li>Contact Us</li>
+              <li onClick={goToHomeAndCloseDrawer} style={{ cursor: 'pointer' }}>{t('home')}</li>
+              <li onClick={() => {
+                window.location.href = '/book-table';
+                setDrawerOpen(false);
+              }} style={{ cursor: 'pointer' }}>{t('bookTable')}</li>
+              <li onClick={() => {
+                window.location.href = '/call-waiter';
+                setDrawerOpen(false);
+              }} style={{ cursor: 'pointer' }}>{t('callWaiter')}</li>
+              <li onClick={() => {
+                window.location.href = '/about-us';
+                setDrawerOpen(false);
+              }} style={{ cursor: 'pointer' }}>{t('aboutUs')}</li>
+              <li onClick={() => {
+                window.location.href = '/contact-us';
+                setDrawerOpen(false);
+              }} style={{ cursor: 'pointer' }}>{t('contactUs')}</li>
             </ul>
             <div className="navbar__drawer-location">
               <div className="navbar__location" style={{marginLeft:0}}>
@@ -152,7 +182,7 @@ function Navbar() {
                   onClick={() => setDropdownOpen((open) => !open)}
                 >
                   <span className="navbar__location-icon">📍</span>
-                  {selectedLocation}
+                  {t(selectedLocation)}
                   <span className="navbar__dropdown">▼</span>
                 </button>
                 {dropdownOpen && (
@@ -169,23 +199,27 @@ function Navbar() {
                         }}
                       >
                         <span className="navbar__location-icon">📍</span>
-                        {loc.name}
+                        {t(loc.name)}
                       </button>
                     ))}
                   </div>
                 )}
               </div>
             </div>
-            <select className="navbar__drawer-lang-select">
-              <option>English</option>
-              <option>Arabic</option>
+            <select 
+              className="navbar__drawer-lang-select"
+              value={language}
+              onChange={(e) => changeLanguage(e.target.value)}
+            >
+              <option value="en">{t('english')}</option>
+              <option value="ar">{t('arabic')}</option>
             </select>
             <button className="navbar__drawer-call-waiter">
-              <span className="navbar__bell">🔔</span> Call Waiter
+              <span className="navbar__bell">🔔</span> {t('callWaiter')}
             </button>
-            <div className="navbar__drawer-cart">
+            <div className="navbar__drawer-cart" onClick={() => window.location.href = '/cart'}>
               <span className="navbar__cart-icon">🛒</span>
-              <span className="navbar__cart-badge">0</span>
+              <span className="navbar__cart-badge">{getCartCount()}</span>
             </div>
           </div>
         </div>

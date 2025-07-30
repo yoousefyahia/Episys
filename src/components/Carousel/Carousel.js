@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useRef } from 'react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '../Carousel/Carousel.css';
 
 function Carousel({ slides }) {
@@ -44,7 +45,7 @@ function Carousel({ slides }) {
       onTouchEnd={handleDragEnd}
     >
       <button className="carousel__arrow left tw-bg-white tw-shadow-md tw-rounded-full tw-p-2 tw-ml-2 hover:tw-bg-pink-100" onClick={prev} aria-label="السابق">
-        <ChevronLeftIcon className="tw-w-7 tw-h-7 tw-text-pink-400" />
+        <FontAwesomeIcon icon={faChevronLeft} className="tw-w-7 tw-h-7 tw-text-pink-400" />
       </button>
       <div className="carousel__slide">
         {slides.length > 0 && slides[current].image ? (
@@ -59,7 +60,7 @@ function Carousel({ slides }) {
         )}
       </div>
       <button className="carousel__arrow right tw-bg-white tw-shadow-md tw-rounded-full tw-p-2 tw-mr-2 hover:tw-bg-pink-100" onClick={next} aria-label="التالي">
-        <ChevronRightIcon className="tw-w-7 tw-h-7 tw-text-pink-400" />
+        <FontAwesomeIcon icon={faChevronRight} className="tw-w-7 tw-h-7 tw-text-pink-400" />
       </button>
       <div className="carousel__indicators">
         {slides.map((_, idx) => (

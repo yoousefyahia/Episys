@@ -1,3 +1,12 @@
+.categories-carousel {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.categories-title {
+  margin-bottom: 2rem;
+}
+
 .category-item {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -5,4 +14,122 @@
 .category-item:hover {
   transform: translateY(-5px) scale(1.03);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* زيادة المسافة في الموبايل */
+@media (max-width: 768px) {
+  .categories-carousel {
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .categories-title {
+    margin-bottom: 1.5rem;
+  }
+  
+  .categories-title h2 {
+    font-size: 1.5rem;
+  }
+  
+  .category-item {
+    min-height: 100px;
+    max-width: 100px;
+    width: 100px;
+    height: 100px;
+    padding: 0.75rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .category-item span:first-child {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .category-item span:last-child {
+    font-size: 0.875rem;
+  }
+}
+
+/* تحسينات للشاشات الصغيرة جداً */
+@media (max-width: 480px) {
+  .categories-carousel {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .categories-title {
+    margin-bottom: 1rem;
+  }
+  
+  .categories-title h2 {
+    font-size: 1.25rem;
+  }
+  
+  .category-item {
+    min-height: 80px;
+    max-width: 80px;
+    width: 80px;
+    height: 80px;
+    padding: 0.5rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .category-item span:first-child {
+    font-size: 1.25rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .category-item span:last-child {
+    font-size: 0.7rem;
+    text-align: center;
+    line-height: 1.2;
+  }
+}
+
+/* تحسينات للشاشات الصغيرة جداً */
+@media (max-width: 360px) {
+  .categories-carousel {
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .categories-title {
+    margin-bottom: 0.75rem;
+  }
+  
+  .categories-title h2 {
+    font-size: 1.1rem;
+  }
+  
+  .category-item {
+    min-height: 70px;
+    max-width: 70px;
+    width: 70px;
+    height: 70px;
+    padding: 0.4rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .category-item span:first-child {
+    font-size: 1rem;
+    margin-bottom: 0.15rem;
+  }
+  
+  .category-item span:last-child {
+    font-size: 0.65rem;
+    text-align: center;
+    line-height: 1.1;
+  }
 }

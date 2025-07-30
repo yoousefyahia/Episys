@@ -209,6 +209,7 @@
   flex-shrink: 0;
   overflow: hidden;
   transition: background 0.2s;
+  cursor: pointer;
 }
 .navbar__cart:hover {
   background: rgb(37, 26, 87)
@@ -373,6 +374,12 @@
   justify-content: center;
   margin: 0 auto 18px auto;
   position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.navbar__drawer-cart:hover {
+  background: #ff4c4c;
 }
 
 .navbar__drawer-cart .navbar__cart-icon {
