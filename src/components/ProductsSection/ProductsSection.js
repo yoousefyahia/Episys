@@ -10,7 +10,6 @@ import './ProductsSection.css';
 
 
 const getProductsData = (t) => [
-  // الأطباق الرئيسية
   {
     id: 1,
     name: t('burger'),
@@ -27,7 +26,6 @@ const getProductsData = (t) => [
     preparationTime: `20 ${t('minutes')}`,
     price: `55 ${t('riyal')}`
   },
-  // المشروبات الباردة
   {
     id: 3,
     name: t('orangeJuice'),
@@ -36,7 +34,6 @@ const getProductsData = (t) => [
     preparationTime: `3 ${t('minutes')}`,
     price: `18 ${t('riyal')}`
   },
-  // المشروبات الساخنة
   {
     id: 4,
     name: t('cappuccino'),
@@ -69,7 +66,6 @@ const getProductsData = (t) => [
     preparationTime: `7 ${t('minutes')}`,
     price: `30 ${t('riyal')}`
   },
-  // المخبوزات
   {
     id: 8,
     name: t('croissant'),
@@ -78,7 +74,6 @@ const getProductsData = (t) => [
     preparationTime: `2 ${t('minutes')}`,
     price: `12 ${t('riyal')}`
   },
-  // الحلويات
   {
     id: 9,
     name: t('cheesecake'),
@@ -116,12 +111,10 @@ export default function ProductsSection({ selectedCategory: propSelectedCategory
     const productsData = getProductsData(t);
     let filtered = productsData;
 
-    // فلترة حسب الفئة
     if (propSelectedCategory && propSelectedCategory !== t('allProducts')) {
       filtered = filtered.filter(product => product.category === propSelectedCategory);
     }
 
-    // فلترة حسب البحث
     if (searchTerm.trim()) {
       filtered = filtered.filter(product =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -132,7 +125,6 @@ export default function ProductsSection({ selectedCategory: propSelectedCategory
     setFilteredProducts(filtered);
   }, [searchTerm, propSelectedCategory, isClient, t, language]);
 
-  // تجميع المنتجات حسب الفئة
   const groupedProducts = filteredProducts.reduce((acc, product) => {
     if (!acc[product.category]) {
       acc[product.category] = [];
@@ -146,7 +138,6 @@ export default function ProductsSection({ selectedCategory: propSelectedCategory
   };
 
   const handleAddToCart = (product) => {
-    // تحويل السعر من نص إلى رقم
     const price = parseFloat(product.price.split(' ')[0]);
     const productWithPrice = {
       ...product,

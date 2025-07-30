@@ -19,7 +19,6 @@ export default function Cart() {
   const [selectedAddons, setSelectedAddons] = useState({});
   const [notes, setNotes] = useState('');
 
-  // حساب السعر الإجمالي للمنتج مع الأحجام والإضافات
   const getItemTotalPrice = (item) => {
     const basePrice = item.price;
     const sizePrice = selectedSizes[item.id]?.price || 0;
@@ -27,21 +26,13 @@ export default function Cart() {
     return (basePrice + sizePrice + addonsPrice) * item.quantity;
   };
 
-  // حساب المجموع الفرعي
   const subtotal = cartItems.reduce((sum, item) => sum + getItemTotalPrice(item), 0);
-  
-  // رسوم الخدمة 10%
   const serviceCharge = subtotal * 0.1;
-  
-  // الضريبة 14%
   const tax = subtotal * 0.14;
-  
-  // المجموع النهائي
   const finalTotal = subtotal - discount + serviceCharge + tax;
 
 
 
-  // تطبيق كوبون الخصم
   const applyCoupon = () => {
     if (couponCode.toLowerCase() === 'discount10') {
       setDiscount(subtotal * 0.1);
@@ -51,55 +42,42 @@ export default function Cart() {
     }
   };
 
-  // التحقق من صحة البيانات قبل إتمام الطلب
   const validateOrder = () => {
     const errors = [];
 
-    // التحقق من وجود منتجات في العربة
     if (cartItems.length === 0) {
       errors.push(t('cartEmpty'));
       return errors;
     }
 
-    // التحقق من اختيار الأحجام لجميع المنتجات
     cartItems.forEach((item, index) => {
       if (!selectedSizes[item.id]) {
         errors.push(`${t('selectSizeFor')} ${item.name}`);
       }
     });
 
-    // التحقق من الكمية (يجب أن تكون أكبر من 0)
     cartItems.forEach((item) => {
       if (item.quantity <= 0) {
         errors.push(`${t('invalidQuantityFor')} ${item.name}`);
       }
     });
 
-    // التحقق من السعر الإجمالي
     if (finalTotal <= 0) {
       errors.push(t('invalidTotalPrice'));
     }
 
-
-
     return errors;
   };
 
-  // إتمام الطلب
   const proceedToOrder = () => {
-    // التحقق من صحة البيانات
     const validationErrors = validateOrder();
     
     if (validationErrors.length > 0) {
-      // عرض جميع الأخطاء
       validationErrors.forEach(errorMsg => {
         error(errorMsg);
       });
       return;
     }
-    
-
-    
 
     success(t('orderPlaced'));
     clearCart();
@@ -109,7 +87,6 @@ export default function Cart() {
     setNotes('');
   };
 
-  // إلغاء الطلب
   const cancelOrder = () => {
     clearCart();
     setDiscount(0);
@@ -127,7 +104,6 @@ export default function Cart() {
     }));
   };
 
-  // إدارة الإضافات
   const handleAddonToggle = (itemId, addon, price) => {
     setSelectedAddons(prev => {
       const currentAddons = prev[itemId] || [];

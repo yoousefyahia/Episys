@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import "../Navbar/Navbar.css";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -20,19 +20,10 @@ function Navbar() {
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(0);
-  
-
   const dropdownRef = useRef(null);
   const drawerRef = useRef(null);
 
-  const scrollToFooter = () => {
-    document.querySelector('footer').scrollIntoView({ behavior: 'smooth' });
-  };
 
-  const scrollToFooterAndCloseDrawer = () => {
-    scrollToFooter();
-    setDrawerOpen(false);
-  };
 
   const goToHome = () => {
     window.location.href = '/';
@@ -44,18 +35,10 @@ function Navbar() {
   };
 
   const handleLocationChange = useCallback((newLocation) => {
-    console.log('Changing location to:', newLocation);
     setSelectedLocation(newLocation);
     setDropdownOpen(false);
     setMobileDropdownOpen(false);
-    
-    // Force re-render immediately
     setForceUpdate(prev => prev + 1);
-    
-    // Force re-render after state update
-    setTimeout(() => {
-      setForceUpdate(prev => prev + 1);
-    }, 10);
   }, []);
 
   // Close dropdown and drawer when clicking outside
@@ -99,16 +82,7 @@ function Navbar() {
     };
   }, [dropdownOpen, mobileDropdownOpen, drawerOpen]);
 
-  // Debug selectedLocation changes
-  useEffect(() => {
-    console.log('Selected location changed to:', selectedLocation);
-    console.log('Force update count:', forceUpdate);
-  }, [selectedLocation, forceUpdate]);
 
-  // Debug translation changes
-  useEffect(() => {
-    console.log('Translation for selectedLocation:', t(selectedLocation));
-  }, [selectedLocation, language]);
 
   // Close mobile dropdown when drawer closes
   useEffect(() => {
@@ -259,7 +233,10 @@ function Navbar() {
               <option value="en">{t('english')}</option>
               <option value="ar">{t('arabic')}</option>
             </select>
-            <button className="navbar__drawer-call-waiter">
+            <button className="navbar__drawer-call-waiter" onClick={() => {
+              window.location.href = '/call-waiter';
+              setDrawerOpen(false);
+            }}>
               <span className="navbar__bell">🔔</span> {t('callWaiter')}
             </button>
             <div className="navbar__drawer-cart" onClick={() => window.location.href = '/cart'}>
