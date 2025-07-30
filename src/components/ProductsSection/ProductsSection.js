@@ -8,7 +8,7 @@ import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/contexts/ToastContext';
 import './ProductsSection.css';
 
-// بيانات المنتجات - يمكن نقلها لملف منفصل لاحقاً
+
 const getProductsData = (t) => [
   // الأطباق الرئيسية
   {

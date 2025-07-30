@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import "../Navbar/Navbar.css";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -17,7 +17,11 @@ function Navbar() {
   const { getCartCount } = useCart();
   const [selectedLocation, setSelectedLocation] = useState(LOCATIONS[0].name);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [forceUpdate, setForceUpdate] = useState(0);
+  
+
   const dropdownRef = useRef(null);
   const drawerRef = useRef(null);
 
@@ -39,15 +43,39 @@ function Navbar() {
     setDrawerOpen(false);
   };
 
+  const handleLocationChange = useCallback((newLocation) => {
+    console.log('Changing location to:', newLocation);
+    setSelectedLocation(newLocation);
+    setDropdownOpen(false);
+    setMobileDropdownOpen(false);
+    
+    // Force re-render immediately
+    setForceUpdate(prev => prev + 1);
+    
+    // Force re-render after state update
+    setTimeout(() => {
+      setForceUpdate(prev => prev + 1);
+    }, 10);
+  }, []);
+
   // Close dropdown and drawer when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
-      // Close dropdown
+      // Close desktop dropdown
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target)
       ) {
         setDropdownOpen(false);
+      }
+      
+      // Close mobile dropdown
+      if (
+        drawerRef.current &&
+        !drawerRef.current.contains(event.target) &&
+        !event.target.classList.contains("navbar__hamburger")
+      ) {
+        setMobileDropdownOpen(false);
       }
       
       // Close drawer
@@ -60,7 +88,7 @@ function Navbar() {
       }
     }
     
-    if (dropdownOpen || drawerOpen) {
+    if (dropdownOpen || mobileDropdownOpen || drawerOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -69,7 +97,25 @@ function Navbar() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [dropdownOpen, drawerOpen]);
+  }, [dropdownOpen, mobileDropdownOpen, drawerOpen]);
+
+  // Debug selectedLocation changes
+  useEffect(() => {
+    console.log('Selected location changed to:', selectedLocation);
+    console.log('Force update count:', forceUpdate);
+  }, [selectedLocation, forceUpdate]);
+
+  // Debug translation changes
+  useEffect(() => {
+    console.log('Translation for selectedLocation:', t(selectedLocation));
+  }, [selectedLocation, language]);
+
+  // Close mobile dropdown when drawer closes
+  useEffect(() => {
+    if (!drawerOpen) {
+      setMobileDropdownOpen(false);
+    }
+  }, [drawerOpen]);
 
   return (
     <>
@@ -80,11 +126,12 @@ function Navbar() {
         </div>
         <div className="navbar__location navbar__hide-mobile" ref={dropdownRef}>
           <button
+            key={`desktop-location-${selectedLocation}`}
             className={`navbar__location-btn${dropdownOpen ? " active" : ""}`}
             onClick={() => setDropdownOpen((open) => !open)}
           >
             <span className="navbar__location-icon">📍</span>
-            {t(selectedLocation)}
+            <span className="location-text">{t(selectedLocation)}</span>
             <span className="navbar__dropdown">▼</span>
           </button>
           {dropdownOpen && (
@@ -95,10 +142,7 @@ function Navbar() {
                   className={`navbar__location-option${
                     selectedLocation === loc.name ? " selected" : ""
                   }`}
-                  onClick={() => {
-                    setSelectedLocation(loc.name);
-                    setDropdownOpen(false);
-                  }}
+                  onClick={() => handleLocationChange(loc.name)}
                 >
                   <span className="navbar__location-icon">📍</span>
                   {t(loc.name)}
@@ -146,7 +190,7 @@ function Navbar() {
             <div className="navbar__drawer-header">
               <div className="navbar__logo">
                 <Image src="/logo.png" alt="Logo" width={40} height={40} style={{marginRight: 8}} />
-                <span className="navbar__brand">DIPNROLL</span>
+                <span className="navbar__brand">EPISYS</span>
               </div>
               <button
                 className="navbar__drawer-close"
@@ -178,28 +222,29 @@ function Navbar() {
             <div className="navbar__drawer-location">
               <div className="navbar__location" style={{marginLeft:0}}>
                 <button
-                  className="navbar__location-btn"
-                  onClick={() => setDropdownOpen((open) => !open)}
+                  key={`mobile-location-${selectedLocation}-${forceUpdate}`}
+                  className={`navbar__location-btn ${mobileDropdownOpen ? " active" : ""}`}
+                  onClick={() => setMobileDropdownOpen((open) => !open)}
                 >
                   <span className="navbar__location-icon">📍</span>
-                  {t(selectedLocation)}
-                  <span className="navbar__dropdown">▼</span>
+                  <span className="location-text">{t(selectedLocation)}</span>
+                  <span className={`navbar__dropdown ${mobileDropdownOpen ? " rotated" : ""}`}>▼</span>
                 </button>
-                {dropdownOpen && (
-                  <div className="navbar__location-dropdown">
+                {mobileDropdownOpen && (
+                  <div className="navbar__location-dropdown mobile-dropdown">
                     {LOCATIONS.map((loc) => (
                       <button
                         key={loc.name}
                         className={`navbar__location-option${
                           selectedLocation === loc.name ? " selected" : ""
                         }`}
-                        onClick={() => {
-                          setSelectedLocation(loc.name);
-                          setDropdownOpen(false);
-                        }}
+                        onClick={() => handleLocationChange(loc.name)}
                       >
                         <span className="navbar__location-icon">📍</span>
                         {t(loc.name)}
+                        {selectedLocation === loc.name && (
+                          <span className="selected-indicator">✓</span>
+                        )}
                       </button>
                     ))}
                   </div>

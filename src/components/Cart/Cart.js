@@ -80,11 +80,7 @@ export default function Cart() {
       errors.push(t('invalidTotalPrice'));
     }
 
-    // التحقق من الملاحظات (اختياري - يمكن أن تكون فارغة)
-    // إذا كنت تريد إجبارية الملاحظات، أضف هذا التحقق:
-    // if (!notes.trim()) {
-    //   errors.push(t('notesRequired'));
-    // }
+
 
     return errors;
   };
@@ -102,23 +98,9 @@ export default function Cart() {
       return;
     }
     
-    // تجميع تفاصيل الطلب
-    const orderDetails = {
-      items: cartItems.map(item => ({
-        ...item,
-        size: selectedSizes[item.id]?.size || 'small',
-        addons: selectedAddons[item.id] || [],
-        totalPrice: getItemTotalPrice(item)
-      })),
-      notes: notes,
-      subtotal: subtotal,
-      discount: discount,
-      serviceCharge: serviceCharge,
-      tax: tax,
-      finalTotal: finalTotal
-    };
+
     
-    console.log('Order Details:', orderDetails);
+
     success(t('orderPlaced'));
     clearCart();
     setDiscount(0);
@@ -165,9 +147,7 @@ export default function Cart() {
     });
   };
 
-  // الحصول على أحجام المنتج حسب فئته
   const getSizesByCategory = (category) => {
-    // تحويل النص المترجم إلى مفتاح الفئة
     const getCategoryKey = (categoryText) => {
       if (categoryText === t('mainDishes')) return 'mainDishes';
       if (categoryText === t('coldDrinks')) return 'coldDrinks';
@@ -214,9 +194,7 @@ export default function Cart() {
     }
   };
 
-  // الحصول على الإضافات حسب فئة المنتج
   const getAddonsByCategory = (category) => {
-    // تحويل النص المترجم إلى مفتاح الفئة
     const getCategoryKey = (categoryText) => {
       if (categoryText === t('mainDishes')) return 'mainDishes';
       if (categoryText === t('coldDrinks')) return 'coldDrinks';

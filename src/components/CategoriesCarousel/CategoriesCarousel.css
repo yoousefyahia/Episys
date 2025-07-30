@@ -21,6 +21,7 @@
   .categories-carousel {
     margin-top: 2rem;
     margin-bottom: 1.5rem;
+    padding: 0 1rem;
   }
   
   .categories-title {
@@ -32,12 +33,12 @@
   }
   
   .category-item {
-    min-height: 100px;
-    max-width: 100px;
-    width: 100px;
-    height: 100px;
-    padding: 0.75rem;
-    border-radius: 12px;
+    min-height: 110px;
+    max-width: 110px;
+    width: 110px;
+    height: 110px;
+    padding: 1rem;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,12 +46,12 @@
   }
   
   .category-item span:first-child {
-    font-size: 1.75rem;
-    margin-bottom: 0.25rem;
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
   }
   
   .category-item span:last-child {
-    font-size: 0.875rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -59,6 +60,7 @@
   .categories-carousel {
     margin-top: 1.5rem;
     margin-bottom: 1rem;
+    padding: 0 1.5rem;
   }
   
   .categories-title {
@@ -70,12 +72,12 @@
   }
   
   .category-item {
-    min-height: 80px;
-    max-width: 80px;
-    width: 80px;
-    height: 80px;
-    padding: 0.5rem;
-    border-radius: 10px;
+    min-height: 95px;
+    max-width: 95px;
+    width: 95px;
+    height: 95px;
+    padding: 0.75rem;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,12 +85,12 @@
   }
   
   .category-item span:first-child {
-    font-size: 1.25rem;
-    margin-bottom: 0.2rem;
+    font-size: 1.75rem;
+    margin-bottom: 0.4rem;
   }
   
   .category-item span:last-child {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     text-align: center;
     line-height: 1.2;
   }
@@ -99,6 +101,7 @@
   .categories-carousel {
     margin-top: 1rem;
     margin-bottom: 0.75rem;
+    padding: 0 2rem;
   }
   
   .categories-title {
@@ -110,12 +113,12 @@
   }
   
   .category-item {
-    min-height: 70px;
-    max-width: 70px;
-    width: 70px;
-    height: 70px;
-    padding: 0.4rem;
-    border-radius: 8px;
+    min-height: 85px;
+    max-width: 85px;
+    width: 85px;
+    height: 85px;
+    padding: 0.6rem;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -123,12 +126,12 @@
   }
   
   .category-item span:first-child {
-    font-size: 1rem;
-    margin-bottom: 0.15rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
   }
   
   .category-item span:last-child {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     text-align: center;
     line-height: 1.1;
   }

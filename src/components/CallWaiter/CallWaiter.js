@@ -34,7 +34,7 @@ export default function CallWaiter() {
 
     setIsCalling(true);
     
-    // محاكاة استدعاء النادل
+
     setTimeout(() => {
       setIsCalling(false);
       success(t('waiterCalledSuccessfully'));
