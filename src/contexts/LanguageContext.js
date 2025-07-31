@@ -129,6 +129,13 @@ export const LanguageProvider = ({ children }) => {
         cartEmpty: 'العربة فارغة!',
         orderPlaced: 'تم تقديم الطلب بنجاح!',
         currency: 'ريال',
+        
+        // Order Type
+        orderType: 'نوع الطلب',
+        hall: 'صالة',
+        takeaway: 'تيك أواي',
+        delivery: 'ديلفري',
+        selectOrderType: 'اختر نوع الطلب',
 
         // Cart customization
         availableSizes: 'الأحجام المتاحة',
@@ -253,6 +260,12 @@ export const LanguageProvider = ({ children }) => {
         total: 'المجموع',
         addToCart: 'إضافة إلى السلة',
         notes: 'الملاحظات',
+
+        // PWA Install Prompt
+        installApp: 'ثبت التطبيق',
+        installAppDescription: 'احصل على تجربة أفضل مع تطبيق EPISYS المخصص',
+        install: 'تثبيت',
+        dismiss: 'إغلاق',
       },
       en: {
         // Navbar
@@ -339,6 +352,13 @@ export const LanguageProvider = ({ children }) => {
         cartEmpty: 'Cart is empty!',
         orderPlaced: 'Order placed successfully!',
         currency: 'SAR',
+        
+        // Order Type
+        orderType: 'Order Type',
+        hall: 'Hall',
+        takeaway: 'Takeaway',
+        delivery: 'Delivery',
+        selectOrderType: 'Select Order Type',
 
         // Cart customization
         availableSizes: 'Available Sizes',
@@ -462,6 +482,12 @@ export const LanguageProvider = ({ children }) => {
         total: 'Total',
         addToCart: 'Add to Cart',
         notes: 'Notes',
+
+        // PWA Install Prompt
+        installApp: 'Install App',
+        installAppDescription: 'Get a better experience with the dedicated EPISYS app',
+        install: 'Install',
+        dismiss: 'Dismiss',
       },
     };
 

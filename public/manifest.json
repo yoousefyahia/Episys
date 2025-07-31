@@ -1,21 +1,90 @@
 {
   "name": "EPISYS - نظام إدارة المطاعم",
   "short_name": "EPISYS",
-  "description": "نظام إدارة المطاعم المتكامل",
+  "description": "نظام إدارة المطاعم المتكامل - طلب طعام سريع وآمن",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#11998e",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["food", "restaurant", "business"],
   "icons": [
     {
       "src": "/logo.jpg",
+      "sizes": "72x72",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "96x96",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "128x128",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "144x144",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "152x152",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.jpg",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "384x384",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
     },
     {
       "src": "/logo.jpg",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "طلب طعام",
+      "short_name": "طلب",
+      "description": "طلب طعام جديد",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/logo.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "السلة",
+      "short_name": "السلة",
+      "description": "عرض سلة التسوق",
+      "url": "/cart",
+      "icons": [
+        {
+          "src": "/logo.jpg",
+          "sizes": "96x96"
+        }
+      ]
     }
   ]
 }

@@ -19,7 +19,7 @@ import './Cart.css';
 
 export default function Cart() {
   const { t, language } = useLanguage();
-  const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
+  const { cartItems, orderType, removeFromCart, updateQuantity, clearCart, updateOrderType } = useCart();
   const { success, error } = useToast();
   const [couponCode, setCouponCode] = useState('');
   const [discount, setDiscount] = useState(0);
@@ -210,6 +210,37 @@ export default function Cart() {
               className="notes-textarea"
               rows="3"
             />
+          </div>
+        </div>
+
+        {/* قسم نوع الطلب */}
+        <div className="order-type-section">
+          <div className="section-divider"></div>
+          <div className="order-type-group">
+            <label className="order-type-label">{t('orderType')}</label>
+            <div className="order-type-options">
+              <button
+                className={`order-type-btn ${orderType === 'hall' ? 'active' : ''}`}
+                onClick={() => updateOrderType('hall')}
+              >
+                <span className="order-type-icon">🍽️</span>
+                <span className="order-type-text">{t('hall')}</span>
+              </button>
+              <button
+                className={`order-type-btn ${orderType === 'takeaway' ? 'active' : ''}`}
+                onClick={() => updateOrderType('takeaway')}
+              >
+                <span className="order-type-icon">📦</span>
+                <span className="order-type-text">{t('takeaway')}</span>
+              </button>
+              <button
+                className={`order-type-btn ${orderType === 'delivery' ? 'active' : ''}`}
+                onClick={() => updateOrderType('delivery')}
+              >
+                <span className="order-type-icon">🚚</span>
+                <span className="order-type-text">{t('delivery')}</span>
+              </button>
+            </div>
           </div>
         </div>
 

@@ -8,6 +8,7 @@ import ProductsSection from '@/components/ProductsSection/ProductsSection';
 import Footer from '@/components/Footer/Footer';
 import BackToTop from '@/components/BackToTop/BackToTop';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
+import PWAInstallPrompt from '@/components/PWAInstallPrompt/PWAInstallPrompt';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Home() {
@@ -49,6 +50,7 @@ export default function Home() {
         />
         <Footer />
         <BackToTop />
+        <PWAInstallPrompt />
       </div>
     </ErrorBoundary>
   );

@@ -14,6 +14,7 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [orderType, setOrderType] = useState('hall'); // Default to hall
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -27,6 +28,12 @@ export const CartProvider = ({ children }) => {
         // Silently handle localStorage error
       }
     }
+    
+    // Load order type from localStorage if available
+    const savedOrderType = localStorage.getItem('orderType');
+    if (savedOrderType) {
+      setOrderType(savedOrderType);
+    }
   }, []);
 
   // Save cart to localStorage whenever it changes
@@ -35,6 +42,13 @@ export const CartProvider = ({ children }) => {
       localStorage.setItem('cart', JSON.stringify(cartItems));
     }
   }, [cartItems, isClient]);
+
+  // Save order type to localStorage whenever it changes
+  useEffect(() => {
+    if (isClient) {
+      localStorage.setItem('orderType', orderType);
+    }
+  }, [orderType, isClient]);
 
   // Generate unique ID for cart items with different options
   const generateCartItemId = (product) => {
@@ -123,6 +137,10 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
   };
 
+  const updateOrderType = (newOrderType) => {
+    setOrderType(newOrderType);
+  };
+
   const getCartTotal = () => {
     return cartItems.reduce((sum, item) => sum + (item.totalPrice || item.price * item.quantity), 0);
   };
@@ -133,11 +151,13 @@ export const CartProvider = ({ children }) => {
 
   const value = {
     cartItems,
+    orderType,
     addToCart,
     removeFromCart,
     removeFromCartById,
     updateQuantity,
     clearCart,
+    updateOrderType,
     getCartTotal,
     getCartCount,
   };

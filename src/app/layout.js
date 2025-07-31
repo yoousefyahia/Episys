@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: 'EPISYS - الصفحة الرئيسية | EPISYS - Home',
   description:
-    'نظام إدارة المطاعم المتطور - طلب طعام سريع وآمن | Advanced restaurant management system - fast and secure food ordering',
+    'نظام إدارة المطاعم  - طلب طعام سريع وآمن | Advanced restaurant management system - fast and secure food ordering',
   keywords: 'مطعم، طعام، طلب، عربة تسوق، EPISYS، restaurant, food, order, cart',
   authors: [{ name: 'EPISYS Team' }],
   viewport: 'width=device-width, initial-scale=1',
@@ -49,7 +49,11 @@ export default function RootLayout({ children }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#11998e" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="EPISYS" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <link rel="icon" href="/logo.jpg" />
         <link rel="apple-touch-icon" href="/logo.jpg" />
         <script

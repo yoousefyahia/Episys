@@ -1,5 +1,5 @@
 // Service Worker for EPISYS PWA
-const CACHE_NAME = 'episys-v1.0.0';
+const CACHE_NAME = 'episys-v1.1.0';
 const urlsToCache = [
   '/',
   '/manifest.json',
@@ -8,6 +8,10 @@ const urlsToCache = [
   '/images/visa.png',
   '/images/instapay.png',
   '/images/vodafone.jfif',
+  '/images/p1.jpg',
+  '/images/p2.webp',
+  '/images/p3.jpg',
+  '/images/table.png',
 ];
 
 // Install event
