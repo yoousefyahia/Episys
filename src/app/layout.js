@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: 'EPISYS - الصفحة الرئيسية | EPISYS - Home',
+  title: 'EPISYS',
   description:
     'نظام إدارة المطاعم  - طلب طعام سريع وآمن | Advanced restaurant management system - fast and secure food ordering',
   keywords: 'مطعم، طعام، طلب، عربة تسوق، EPISYS، restaurant, food, order, cart',
@@ -30,7 +30,7 @@ export const metadata = {
   },
   manifest: '/manifest.json',
   openGraph: {
-    title: 'EPISYS - نظام إدارة المطاعم',
+    title: 'EPISYS',
     description: 'نظام إدارة المطاعم المتطور - طلب طعام سريع وآمن',
     type: 'website',
     locale: 'ar_SA',
@@ -38,7 +38,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'EPISYS - نظام إدارة المطاعم',
+    title: 'EPISYS',
     description: 'نظام إدارة المطاعم المتطور - طلب طعام سريع وآمن',
   },
 };
