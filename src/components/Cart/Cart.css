@@ -132,6 +132,22 @@
   margin-bottom: 10px;
 }
 
+.selected-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.option-tag {
+  background: #3498db;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 .item-actions {
   display: flex;
   flex-direction: column;
@@ -335,88 +351,7 @@
   box-shadow: 0 8px 25px rgba(149, 165, 166, 0.4);
 }
 
-/* خيارات الأحجام */
-.size-options {
-  margin: 20px 0;
-}
 
-.options-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.size-buttons {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.size-btn {
-  background: linear-gradient(45deg, #ecf0f1, #bdc3c7);
-  border: none;
-  padding: 12px 20px;
-  border-radius: 15px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  color: #2c3e50;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.size-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.size-btn.selected {
-  background: linear-gradient(45deg, #3498db, #2980b9);
-  color: white;
-  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
-}
-
-/* خيارات الإضافات */
-.addon-options {
-  margin: 20px 0;
-}
-
-.addon-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-}
-
-.addon-item {
-  display: flex;
-  align-items: center;
-  padding: 12px 15px;
-  background: rgba(236, 240, 241, 0.5);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.addon-item:hover {
-  background: rgba(52, 152, 219, 0.1);
-  transform: translateX(5px);
-}
-
-.addon-item input[type="checkbox"] {
-  margin-right: 10px;
-  width: 18px;
-  height: 18px;
-  accent-color: #3498db;
-}
-
-.addon-name {
-  font-size: 14px;
-  color: #2c3e50;
-  font-weight: 500;
-}
 
 /* قسم الملاحظات */
 .notes-section {
@@ -508,26 +443,7 @@
     max-width: none;
   }
   
-  .size-buttons {
-    justify-content: center;
-  }
-  
-  .size-btn {
-    flex: 1;
-    min-width: 100px;
-  }
-  
-  .addon-list {
-    grid-template-columns: 1fr;
-  }
-  
-  .addon-item {
-    padding: 15px;
-  }
-  
-  .addon-name {
-    font-size: 16px;
-  }
+
   
   .notes-textarea {
     min-height: 100px;

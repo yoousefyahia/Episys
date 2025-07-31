@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState } from 'react';
 import Toast from '@/components/Toast/Toast';
+import { useLanguage } from './LanguageContext';
 
 const ToastContext = createContext();
 
@@ -15,8 +16,9 @@ export const useToast = () => {
 
 export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
+  const { language } = useLanguage();
 
-  const showToast = (message, type = 'success', duration = 3000) => {
+  const showToast = (message, type = 'success', duration = 1000) => {
     const id = Date.now() + Math.random();
     const newToast = { id, message, type, duration };
     
@@ -42,7 +44,7 @@ export const ToastProvider = ({ children }) => {
   return (
     <ToastContext.Provider value={value}>
       {children}
-      <div className="toast-container">
+      <div className="toast-container" dir={language === 'ar' ? 'rtl' : 'ltr'}>
         {toasts.map((toast) => (
           <Toast
             key={toast.id}
@@ -50,6 +52,7 @@ export const ToastProvider = ({ children }) => {
             type={toast.type}
             duration={toast.duration}
             onClose={() => removeToast(toast.id)}
+            language={language}
           />
         ))}
       </div>

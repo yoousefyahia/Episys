@@ -96,12 +96,19 @@
     grid-template-columns: repeat(3, 1fr);
   }
   
+  .product-image {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  
   .product-name {
-    min-height: 3.5rem;
+    min-height: 2.5rem;
+    margin-bottom: 0.25rem;
   }
   
   .preparation-time {
-    min-height: 1.75rem;
+    min-height: 1.25rem;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -110,12 +117,19 @@
     grid-template-columns: repeat(4, 1fr);
   }
   
+  .product-image {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  
   .product-name {
-    min-height: 4rem;
+    min-height: 3rem;
+    margin-bottom: 0.25rem;
   }
   
   .preparation-time {
-    min-height: 2rem;
+    min-height: 1.5rem;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -137,10 +151,14 @@
 }
 
 .product-image {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  position: relative;
+  width: 150px !important;
+  height: 150px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  margin: 1rem auto !important;
+  position: relative !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  flex-shrink: 0 !important;
 }
 
 .product-image img {
@@ -155,7 +173,7 @@
 }
 
 .product-info {
-  padding: 1.5rem;
+  padding: 0.75rem;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -165,9 +183,9 @@
   font-size: 1.25rem;
   font-weight: bold;
   color: #1f2937;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
   text-align: center;
-  min-height: 3rem;
+  min-height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -181,17 +199,28 @@
   gap: 0.5rem;
   color: #6b7280;
   font-size: 0.875rem;
-  margin-bottom: 1rem;
-  min-height: 1.5rem;
+  margin-bottom: 0.5rem;
+  min-height: 1rem;
 }
+
+  .product-price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #dc2626;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    min-height: 1.25rem;
+  }
 
 /* أزرار المنتج */
 .product-actions {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.25rem;
   margin-top: auto;
-  padding-top: 1rem;
+  padding-top: 0.25rem;
 }
 
 .add-to-cart-btn {
@@ -199,7 +228,7 @@
   color: white;
   border: none;
   border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
@@ -214,24 +243,38 @@
   background-color: #dc2626;
 }
 
-.call-waiter-btn {
+
+
+/* زر استدعاء النادل الثابت */
+.call-waiter-fixed-btn {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
   background-color: #10b981;
   color: white;
   border: none;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-size: 1.125rem;
 }
 
-.call-waiter-btn:hover {
+/* دعم اللغة العربية */
+[dir="rtl"] .call-waiter-fixed-btn {
+  right: auto;
+  left: 2rem;
+}
+
+.call-waiter-fixed-btn:hover {
   background-color: #059669;
+  transform: scale(1.1);
 }
 
 /* زر السلة */
@@ -243,8 +286,8 @@
   color: white;
   border: none;
   border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
+  width: 3.5rem;
+  height: 3.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -297,23 +340,59 @@
     font-size: 1.5rem;
   }
   
+  .product-image {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
   .product-info {
-    padding: 1rem;
+    padding: 0.375rem;
   }
   
   .product-name {
-    font-size: 1.125rem;
-    min-height: 2.5rem;
+    font-size: 0.875rem !important;
+    min-height: 1rem !important;
+    margin-bottom: 0.125rem !important;
   }
   
   .preparation-time {
-    min-height: 1.25rem;
+    min-height: 0.75rem !important;
+    margin-bottom: 0.25rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .product-price {
+    font-size: 0.875rem !important;
+    min-height: 1rem !important;
+  }
+  
+  .add-to-cart-btn {
+    padding: 0.25rem 0.375rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .product-actions {
+    padding-top: 0.125rem;
+    gap: 0.125rem;
   }
   
   .cart-button {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3rem;
+    height: 3rem;
     bottom: 1.5rem;
+    left: 1.5rem;
+  }
+  
+  .call-waiter-fixed-btn {
+    width: 3rem;
+    height: 3rem;
+    bottom: 5rem;
+    right: 1.5rem;
+    font-size: 1rem;
+  }
+  
+  [dir="rtl"] .call-waiter-fixed-btn {
+    right: auto;
     left: 1.5rem;
   }
 } 

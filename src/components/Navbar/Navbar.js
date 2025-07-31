@@ -5,16 +5,19 @@ import "../Navbar/Navbar.css";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useCart } from "@/contexts/CartContext";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const LOCATIONS = [
   { name: "degla" },
-  { name: "nasrCity" },
+  { name: "nasr City" },
   { name: "alexandria" },
 ];
 
 function Navbar() {
   const { language, changeLanguage, t } = useLanguage();
   const { getCartCount } = useCart();
+  const pathname = usePathname();
   const [selectedLocation, setSelectedLocation] = useState(LOCATIONS[0].name);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
@@ -23,14 +26,17 @@ function Navbar() {
   const dropdownRef = useRef(null);
   const drawerRef = useRef(null);
 
-
-
-  const goToHome = () => {
-    window.location.href = '/';
+  // Function to check if a link is active
+  const isActive = (path) => {
+    if (path === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(path);
   };
 
+
+
   const goToHomeAndCloseDrawer = () => {
-    goToHome();
     setDrawerOpen(false);
   };
 
@@ -94,10 +100,12 @@ function Navbar() {
   return (
     <>
       <nav className="navbar">
-        <div className="navbar__logo">
-          <Image src="/logo.png" alt="Logo" width={40} height={40} style={{marginRight: 8}} />
-          <span className="navbar__brand">EPISYS</span>
-        </div>
+        <Link href="/">
+          <div className="navbar__logo">
+            <Image src="/images/logo.png" alt="Logo" width={40} height={40} style={{marginRight: 8}} />
+            <span className="navbar__brand">EPISYS</span>
+          </div>
+        </Link>
         <div className="navbar__location navbar__hide-mobile" ref={dropdownRef}>
           <button
             key={`desktop-location-${selectedLocation}`}
@@ -126,10 +134,18 @@ function Navbar() {
           )}
         </div>
         <ul className="navbar__links navbar__hide-mobile">
-          <li onClick={goToHome} style={{ cursor: 'pointer' }}>{t('home')}</li>
-          <li onClick={() => window.location.href = '/book-table'} style={{ cursor: 'pointer' }}>{t('bookTable')}</li>
-          <li onClick={() => window.location.href = '/about-us'} style={{ cursor: 'pointer' }}>{t('aboutUs')}</li>
-          <li onClick={() => window.location.href = '/contact-us'} style={{ cursor: 'pointer' }}>{t('contactUs')}</li>
+          <Link href="/">
+            <li className={isActive('/') ? 'active' : ''} style={{ cursor: 'pointer' }}>{t('home')}</li>
+          </Link>
+          <Link href="/book-table">
+            <li className={isActive('/book-table') ? 'active' : ''} style={{ cursor: 'pointer' }}>{t('bookTable')}</li>
+          </Link>
+          <Link href="/about-us">
+            <li className={isActive('/about-us') ? 'active' : ''} style={{ cursor: 'pointer' }}>{t('aboutUs')}</li>
+          </Link>
+          <Link href="/contact-us">
+            <li className={isActive('/contact-us') ? 'active' : ''} style={{ cursor: 'pointer' }}>{t('contactUs')}</li>
+          </Link>
         </ul>
         <div className="navbar__actions navbar__hide-mobile">
           <select 
@@ -140,13 +156,17 @@ function Navbar() {
             <option value="en">{t('english')}</option>
             <option value="ar">{t('arabic')}</option>
           </select>
-          <button className="navbar__call-waiter" onClick={() => window.location.href = '/call-waiter'}>
-            <span className="navbar__bell">🔔</span> {t('callWaiter')}
-          </button>
-          <div className="navbar__cart" onClick={() => window.location.href = '/cart'}>
-            <span className="navbar__cart-icon">🛒</span>
-            <span className="navbar__cart-badge">{getCartCount()}</span>
-          </div>
+          <Link href="/call-waiter">
+            <button className="navbar__call-waiter">
+              <span className="navbar__bell">🔔</span> {t('callWaiter')}
+            </button>
+          </Link>
+          <Link href="/cart">
+            <div className="navbar__cart">
+              <span className="navbar__cart-icon">🛒</span>
+              <span className="navbar__cart-badge">{getCartCount()}</span>
+            </div>
+          </Link>
         </div>
         {/* Hamburger icon for mobile */}
         <button
@@ -162,10 +182,12 @@ function Navbar() {
         <div className="navbar__drawer-overlay navbar__show-mobile">
           <div className="navbar__drawer" ref={drawerRef}>
             <div className="navbar__drawer-header">
-              <div className="navbar__logo">
-                <Image src="/logo.png" alt="Logo" width={40} height={40} style={{marginRight: 8}} />
-                <span className="navbar__brand">EPISYS</span>
-              </div>
+              <Link href="/">
+                <div className="navbar__logo">
+                  <Image src="/images/logo.png" alt="Logo" width={40} height={40} style={{marginRight: 8}} />
+                  <span className="navbar__brand">EPISYS</span>
+                </div>
+              </Link>
               <button
                 className="navbar__drawer-close"
                 onClick={() => setDrawerOpen(false)}
@@ -175,23 +197,21 @@ function Navbar() {
               </button>
             </div>
             <ul className="navbar__drawer-links">
-              <li onClick={goToHomeAndCloseDrawer} style={{ cursor: 'pointer' }}>{t('home')}</li>
-              <li onClick={() => {
-                window.location.href = '/book-table';
-                setDrawerOpen(false);
-              }} style={{ cursor: 'pointer' }}>{t('bookTable')}</li>
-              <li onClick={() => {
-                window.location.href = '/call-waiter';
-                setDrawerOpen(false);
-              }} style={{ cursor: 'pointer' }}>{t('callWaiter')}</li>
-              <li onClick={() => {
-                window.location.href = '/about-us';
-                setDrawerOpen(false);
-              }} style={{ cursor: 'pointer' }}>{t('aboutUs')}</li>
-              <li onClick={() => {
-                window.location.href = '/contact-us';
-                setDrawerOpen(false);
-              }} style={{ cursor: 'pointer' }}>{t('contactUs')}</li>
+              <Link href="/">
+                <li className={isActive('/') ? 'active' : ''} onClick={goToHomeAndCloseDrawer} style={{ cursor: 'pointer' }}>{t('home')}</li>
+              </Link>
+              <Link href="/book-table">
+                <li className={isActive('/book-table') ? 'active' : ''} onClick={() => setDrawerOpen(false)} style={{ cursor: 'pointer' }}>{t('bookTable')}</li>
+              </Link>
+              <Link href="/call-waiter">
+                <li className={isActive('/call-waiter') ? 'active' : ''} onClick={() => setDrawerOpen(false)} style={{ cursor: 'pointer' }}>{t('callWaiter')}</li>
+              </Link>
+              <Link href="/about-us">
+                <li className={isActive('/about-us') ? 'active' : ''} onClick={() => setDrawerOpen(false)} style={{ cursor: 'pointer' }}>{t('aboutUs')}</li>
+              </Link>
+              <Link href="/contact-us">
+                <li className={isActive('/contact-us') ? 'active' : ''} onClick={() => setDrawerOpen(false)} style={{ cursor: 'pointer' }}>{t('contactUs')}</li>
+              </Link>
             </ul>
             <div className="navbar__drawer-location">
               <div className="navbar__location" style={{marginLeft:0}}>

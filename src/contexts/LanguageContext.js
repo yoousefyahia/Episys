@@ -228,7 +228,22 @@ export const LanguageProvider = ({ children }) => {
         selectSizeFor: 'يرجى اختيار حجم لـ',
         invalidQuantityFor: 'كمية غير صحيحة لـ',
         invalidTotalPrice: 'السعر الإجمالي غير صحيح',
-        notesRequired: 'الملاحظات مطلوبة'
+        notesRequired: 'الملاحظات مطلوبة',
+        
+        // Toast messages
+        productAddedToCart: 'تم إضافة المنتج بنجاح',
+        productRemovedFromCart: 'تم إزالة المنتج من السلة',
+        cartUpdated: 'تم تحديث السلة',
+        orderPlacedSuccessfully: 'تم تقديم الطلب بنجاح',
+        errorOccurred: 'حدث خطأ',
+        success: 'نجح',
+        error: 'خطأ',
+        
+        // Modal
+        availableSizes: 'الأحجام المتاحة',
+        orderAddons: 'إضافات الطلب',
+        total: 'المجموع',
+        addToCart: 'إضافة إلى السلة'
       },
       en: {
         // Navbar
@@ -414,7 +429,22 @@ export const LanguageProvider = ({ children }) => {
         selectSizeFor: 'Please select a size for',
         invalidQuantityFor: 'Invalid quantity for',
         invalidTotalPrice: 'Invalid total price',
-        notesRequired: 'Notes are required'
+        notesRequired: 'Notes are required',
+        
+        // Toast messages
+        productAddedToCart: 'added successfully',
+        productRemovedFromCart: 'removed from cart',
+        cartUpdated: 'Cart updated',
+        orderPlacedSuccessfully: 'Order placed successfully',
+        errorOccurred: 'An error occurred',
+        success: 'Success',
+        error: 'Error',
+        
+        // Modal
+        availableSizes: 'Available Sizes',
+        orderAddons: 'Order Add-ons',
+        total: 'Total',
+        addToCart: 'Add to Cart'
       }
     };
 

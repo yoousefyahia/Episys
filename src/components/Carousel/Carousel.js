@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 import '../Carousel/Carousel.css';
 
 function Carousel({ slides }) {
@@ -35,7 +36,7 @@ function Carousel({ slides }) {
 
   return (
     <div
-      className="carousel tw-mx-4 tw-mt-16"
+      className="carousel"
       onMouseDown={handleDragStart}
       onMouseMove={handleDragMove}
       onMouseUp={handleDragEnd}
@@ -44,23 +45,25 @@ function Carousel({ slides }) {
       onTouchMove={handleDragMove}
       onTouchEnd={handleDragEnd}
     >
-      <button className="carousel__arrow left tw-bg-white tw-shadow-md tw-rounded-full tw-p-2 tw-ml-2 hover:tw-bg-pink-100" onClick={prev} aria-label="السابق">
-        <FontAwesomeIcon icon={faChevronLeft} className="tw-w-7 tw-h-7 tw-text-pink-400" />
+      <button className="carousel__arrow left" onClick={prev} aria-label="السابق">
+        <FontAwesomeIcon icon={faChevronLeft} />
       </button>
       <div className="carousel__slide">
         {slides.length > 0 && slides[current].image ? (
-          <img
+          <Image
             src={slides[current].image}
             alt={slides[current].title || `slide-${current+1}`}
+            width={800}
+            height={400}
             className="carousel__img"
-            onError={e => { e.target.style.display = 'none'; }}
+            style={{ objectFit: 'cover' }}
           />
         ) : (
           <div className="carousel__img carousel__img--placeholder"></div>
         )}
       </div>
-      <button className="carousel__arrow right tw-bg-white tw-shadow-md tw-rounded-full tw-p-2 tw-mr-2 hover:tw-bg-pink-100" onClick={next} aria-label="التالي">
-        <FontAwesomeIcon icon={faChevronRight} className="tw-w-7 tw-h-7 tw-text-pink-400" />
+      <button className="carousel__arrow right" onClick={next} aria-label="التالي">
+        <FontAwesomeIcon icon={faChevronRight} />
       </button>
       <div className="carousel__indicators">
         {slides.map((_, idx) => (

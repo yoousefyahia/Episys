@@ -110,7 +110,6 @@ export default function BookTable() {
     setIsSubmitting(true);
     
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       success(t('bookingSuccess'));

@@ -21,7 +21,6 @@ const getCategories = (t) => [
   { label: t('desserts'), icon: faCakeCandles, value: t('desserts') },
 ];
 
-
 export default function CategoriesCarousel({ onCategorySelect, selectedCategory }) {
   const { t, language } = useLanguage();
   const [isClient, setIsClient] = useState(false);
@@ -32,48 +31,46 @@ export default function CategoriesCarousel({ onCategorySelect, selectedCategory 
 
   if (!isClient) {
     return (
-      <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="my-12 flex flex-col items-center justify-center">
-        <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold text-red-500">{t('productCategories')}</h2>
-          <div className="w-20 h-1 bg-red-500 mt-2 mx-auto rounded-full" />
+      <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="categories-container">
+        <div className="categories-header">
+          <h2 className="categories-title">{t('productCategories')}</h2>
+          <div className="categories-underline" />
         </div>
       </div>
     );
   }
 
   return (
-    <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="categories-carousel flex flex-col items-center justify-center">
-      <div className="text-center categories-title">
-        <h2 className="text-3xl font-bold text-red-500">{t('productCategories')}</h2>
-        <div className="w-20 h-1 bg-red-500 mt-2 mx-auto rounded-full" />
+    <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="categories-container">
+      <div className="categories-header">
+        <h2 className="categories-title">{t('productCategories')}</h2>
+        <div className="categories-underline" />
       </div>
 
       <Swiper
         modules={[Navigation]}
-        spaceBetween={16}
+        spaceBetween={12}
         grabCursor={true}
-        slidesPerView={4}
+        slidesPerView="auto"
+        className="categories-swiper"
         breakpoints={{
-          0: { slidesPerView: 2.5, spaceBetween: 8 },
-          360: { slidesPerView: 2.8, spaceBetween: 10 },
-          480: { slidesPerView: 3.2, spaceBetween: 12 },
-          768: { slidesPerView: 3.5, spaceBetween: 14 },
-          1024: { slidesPerView: 4, spaceBetween: 16 },
+          320: { spaceBetween: 8 },
+          480: { spaceBetween: 10 },
+          768: { spaceBetween: 12 },
+          1024: { spaceBetween: 16 },
+          1440: { spaceBetween: 20 },
         }}
-        className="w-full max-w-6xl px-4"
       >
         {getCategories(t).map((cat, idx) => (
-          <SwiperSlide key={idx} className="pb-4">
+          <SwiperSlide key={idx} className="category-slide">
             <div
               onClick={() => onCategorySelect && onCategorySelect(cat.value)}
-              className={`category-item flex flex-col items-center justify-center min-h-[160px] px-6 py-8 rounded-xl shadow-md bg-white transition-all duration-200 cursor-pointer
-                ${selectedCategory === cat.value ? 'text-red-500 font-bold border-2 border-red-500' : 'text-gray-800 hover:text-red-500'}
-              `}
+              className={`category-card ${selectedCategory === cat.value ? 'category-card--active' : ''}`}
             >
-              <span className="text-4xl mb-4">
+              <div className="category-icon">
                 <FontAwesomeIcon icon={cat.icon} />
-              </span>
-              <span className="text-center text-lg leading-snug">{cat.label}</span>
+              </div>
+              <div className="category-label">{cat.label}</div>
             </div>
           </SwiperSlide>
         ))}

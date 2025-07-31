@@ -8,6 +8,7 @@ import {
   faYoutube 
 } from '@fortawesome/free-brands-svg-icons';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Image from 'next/image';
 import './Footer.css';
 
 export default function Footer() {
@@ -52,20 +53,20 @@ export default function Footer() {
             {/* طرق الدفع */}
             <div className="footer-column">
               <h3 className="footer-title">{t('paymentMethods')}</h3>
-                             <div className="payment-methods">
-                 <div className="payment-logo">
-                   <img src="/images/mastercard.png" alt="Mastercard" />
-                 </div>
-                 <div className="payment-logo">
-                   <img src="/images/visa.png" alt="VISA" />
-                 </div>
-                 <div className="payment-logo">
-                   <img src="/images/vodafone.jfif" alt="Vodafone Cash" />
-                 </div>
-                 <div className="payment-logo">
-                   <img src="/images/instapay.png" alt="Instapay" />
-                 </div>
-               </div>
+                                           <div className="payment-methods">
+                <div className="payment-logo">
+                  <Image src="/images/mastercard.png" alt="Mastercard" width={40} height={25} />
+                </div>
+                <div className="payment-logo">
+                  <Image src="/images/visa.png" alt="VISA" width={40} height={25} />
+                </div>
+                <div className="payment-logo">
+                  <Image src="/images/vodafone.jfif" alt="Vodafone Cash" width={40} height={25} />
+                </div>
+                <div className="payment-logo">
+                  <Image src="/images/instapay.png" alt="Instapay" width={40} height={25} />
+                </div>
+              </div>
             </div>
 
             {/* تواصل معنا */}

@@ -17,7 +17,7 @@ const nextConfig = {
     buildActivity: false,
   },
   
-  // إعدادات التصميم المتجاوب
+  // إعدادات PWA
   async headers() {
     return [
       {
@@ -31,7 +31,38 @@ const nextConfig = {
             key: 'X-Content-Type-Options',
             value: 'nosniff',
           },
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
         ],
+      },
+      {
+        source: '/manifest.json',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600',
+          },
+        ],
+      },
+    ];
+  },
+  
+  // تحسين الأداء
+  compress: true,
+  poweredByHeader: false,
+  
+  // إعدادات التطبيق
+  async rewrites() {
+    return [
+      {
+        source: '/sw.js',
+        destination: '/_next/static/sw.js',
       },
     ];
   },

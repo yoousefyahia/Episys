@@ -1,12 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faClock, faBell, faPlus, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/contexts/ToastContext';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ProductGridSkeleton } from '@/components/Skeleton/Skeleton';
 import './ProductsSection.css';
+
+// Dynamic import for ProductModal
+const ProductModal = dynamic(() => import('@/components/ProductModal/ProductModal'), {
+  loading: () => <div className="modal-loading">جاري التحميل...</div>,
+  ssr: false
+});
 
 
 const getProductsData = (t) => [
@@ -14,81 +24,174 @@ const getProductsData = (t) => [
     id: 1,
     name: t('burger'),
     category: t('mainDishes'),
-    image: "/logo.png",
+    image: "/images/p1.jpg",
     preparationTime: `15 ${t('minutes')}`,
-    price: `45 ${t('riyal')}`
+    price: 45,
+    sizes: [
+      { id: 1, name: 'Small', price: 35 },
+      { id: 2, name: 'Medium', price: 45 },
+      { id: 3, name: 'Large', price: 55 }
+    ],
+    addons: [
+      { id: 1, name: 'Extra Cheese', price: 5 },
+      { id: 2, name: 'Extra Meat', price: 8 },
+      { id: 3, name: 'Extra Sauce', price: 3 },
+      { id: 4, name: 'No Onion', price: 0 },
+      { id: 5, name: 'Spicy', price: 0 },
+      { id: 6, name: 'No Pickles', price: 0 }
+    ]
   },
   {
     id: 2,
     name: t('pizza'),
     category: t('mainDishes'),
-    image: "/logo.png",
+    image: "/images/p2.webp",
     preparationTime: `20 ${t('minutes')}`,
-    price: `55 ${t('riyal')}`
+    price: 55,
+    sizes: [
+      { id: 1, name: 'Small', price: 45 },
+      { id: 2, name: 'Medium', price: 55 },
+      { id: 3, name: 'Large', price: 70 }
+    ],
+    addons: [
+      { id: 1, name: 'Extra Cheese', price: 5 },
+      { id: 2, name: 'Extra Meat', price: 8 },
+      { id: 3, name: 'Extra Sauce', price: 3 },
+      { id: 4, name: 'No Onion', price: 0 },
+      { id: 5, name: 'Spicy', price: 0 },
+      { id: 6, name: 'No Pickles', price: 0 }
+    ]
   },
   {
     id: 3,
     name: t('orangeJuice'),
     category: t('coldDrinks'),
-    image: "/logo.png",
+    image: "/images/p3.jpg",
     preparationTime: `3 ${t('minutes')}`,
-    price: `18 ${t('riyal')}`
+    price: 18,
+    sizes: [
+      { id: 1, name: 'Small', price: 15 },
+      { id: 2, name: 'Medium', price: 18 },
+      { id: 3, name: 'Large', price: 22 }
+    ],
+    addons: [
+      { id: 1, name: 'Extra Ice', price: 0 },
+      { id: 2, name: 'No Sugar', price: 0 },
+      { id: 3, name: 'Extra Pulp', price: 2 }
+    ]
   },
   {
     id: 4,
     name: t('cappuccino'),
     category: t('hotDrinks'),
-    image: "/logo.png",
+    image: "/images/p1.jpg",
     preparationTime: `5 ${t('minutes')}`,
-    price: `25 ${t('riyal')}`
+    price: 25,
+    sizes: [
+      { id: 1, name: 'Small', price: 20 },
+      { id: 2, name: 'Medium', price: 25 },
+      { id: 3, name: 'Large', price: 30 }
+    ],
+    addons: [
+      { id: 1, name: 'Extra Shot', price: 3 },
+      { id: 2, name: 'Extra Milk', price: 2 },
+      { id: 3, name: 'No Sugar', price: 0 },
+      { id: 4, name: 'Extra Hot', price: 0 }
+    ]
   },
   {
     id: 5,
     name: t('espresso'),
     category: t('hotDrinks'),
-    image: "/logo.png",
+    image: "/images/p2.webp",
     preparationTime: `3 ${t('minutes')}`,
-    price: `20 ${t('riyal')}`
+    price: 20,
+    sizes: [
+      { id: 1, name: 'Single Shot', price: 18 },
+      { id: 2, name: 'Double Shot', price: 20 },
+      { id: 3, name: 'Triple Shot', price: 25 }
+    ],
+    addons: [
+      { id: 1, name: 'Extra Hot', price: 0 },
+      { id: 2, name: 'No Sugar', price: 0 }
+    ]
   },
   {
     id: 6,
     name: t('latte'),
     category: t('hotDrinks'),
-    image: "/logo.png",
+    image: "/images/p3.jpg",
     preparationTime: `6 ${t('minutes')}`,
-    price: `28 ${t('riyal')}`
+    price: 28,
+    sizes: [
+      { id: 1, name: 'Small', price: 24 },
+      { id: 2, name: 'Medium', price: 28 },
+      { id: 3, name: 'Large', price: 32 }
+    ],
+    addons: [
+      { id: 1, name: 'Extra Shot', price: 3 },
+      { id: 2, name: 'Extra Milk', price: 2 },
+      { id: 3, name: 'No Sugar', price: 0 },
+      { id: 4, name: 'Extra Hot', price: 0 }
+    ]
   },
   {
     id: 7,
     name: t('mocha'),
     category: t('hotDrinks'),
-    image: "/logo.png",
+    image: "/images/p1.jpg",
     preparationTime: `7 ${t('minutes')}`,
-    price: `30 ${t('riyal')}`
+    price: 30,
+    sizes: [
+      { id: 1, name: 'Small', price: 26 },
+      { id: 2, name: 'Medium', price: 30 },
+      { id: 3, name: 'Large', price: 35 }
+    ],
+    addons: [
+      { id: 1, name: 'Extra Shot', price: 3 },
+      { id: 2, name: 'Extra Chocolate', price: 2 },
+      { id: 3, name: 'Extra Milk', price: 2 },
+      { id: 4, name: 'No Sugar', price: 0 }
+    ]
   },
   {
     id: 8,
     name: t('croissant'),
     category: t('pastries'),
-    image: "/logo.png",
+    image: "/images/p2.webp",
     preparationTime: `2 ${t('minutes')}`,
-    price: `12 ${t('riyal')}`
+    price: 12,
+    addons: [
+      { id: 1, name: 'Extra Butter', price: 1 },
+      { id: 2, name: 'Extra Jam', price: 2 },
+      { id: 3, name: 'Extra Honey', price: 2 }
+    ]
   },
   {
     id: 9,
     name: t('cheesecake'),
     category: t('desserts'),
-    image: "/logo.png",
+    image: "/images/p3.jpg",
     preparationTime: `5 ${t('minutes')}`,
-    price: `22 ${t('riyal')}`
+    price: 22,
+    addons: [
+      { id: 1, name: 'Extra Cream', price: 3 },
+      { id: 2, name: 'Extra Berries', price: 4 },
+      { id: 3, name: 'Extra Chocolate', price: 2 }
+    ]
   },
   {
     id: 10,
     name: t('chocolateCake'),
     category: t('desserts'),
-    image: "/logo.png",
+    image: "/images/p1.jpg",
     preparationTime: `5 ${t('minutes')}`,
-    price: `25 ${t('riyal')}`
+    price: 25,
+    addons: [
+      { id: 1, name: 'Extra Cream', price: 3 },
+      { id: 2, name: 'Extra Chocolate', price: 2 },
+      { id: 3, name: 'Extra Nuts', price: 4 }
+    ]
   }
 ];
 
@@ -98,6 +201,8 @@ export default function ProductsSection({ selectedCategory: propSelectedCategory
   const { success } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [modalProduct, setModalProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -125,27 +230,36 @@ export default function ProductsSection({ selectedCategory: propSelectedCategory
     setFilteredProducts(filtered);
   }, [searchTerm, propSelectedCategory, isClient, t, language]);
 
-  const groupedProducts = filteredProducts.reduce((acc, product) => {
-    if (!acc[product.category]) {
-      acc[product.category] = [];
-    }
-    acc[product.category].push(product);
-    return acc;
-  }, {});
+  const groupedProducts = useMemo(() => {
+    return filteredProducts.reduce((acc, product) => {
+      if (!acc[product.category]) {
+        acc[product.category] = [];
+      }
+      acc[product.category].push(product);
+      return acc;
+    }, {});
+  }, [filteredProducts]);
 
   const handleCallWaiter = () => {
-    window.location.href = '/call-waiter';
+    // سيتم استخدام Link بدلاً من window.location.href
+    // هذا سيتم التعامل معه في الـ JSX
   };
 
-  const handleAddToCart = (product) => {
-    const price = parseFloat(product.price.split(' ')[0]);
-    const productWithPrice = {
-      ...product,
-      price: price
-    };
-    addToCart(productWithPrice);
-    success(`تم إضافة ${product.name} إلى السلة!`);
-  };
+  const handleAddToCart = useCallback((product) => {
+    setModalProduct(product);
+    setIsModalOpen(true);
+  }, []);
+
+  const handleModalAddToCart = useCallback((productWithOptions) => {
+    addToCart(productWithOptions);
+    const message = language === 'ar' ? `تم إضافة ${productWithOptions.name} إلى السلة` : `${productWithOptions.name} added to cart`;
+    success(message);
+  }, [addToCart, language, success]);
+
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false);
+    setModalProduct(null);
+  }, []);
 
   return (
     <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="products-section">
@@ -166,7 +280,9 @@ export default function ProductsSection({ selectedCategory: propSelectedCategory
       </div>
 
       {/* عرض المنتجات */}
-      {Object.keys(groupedProducts).length > 0 ? (
+      {!isClient ? (
+        <ProductGridSkeleton count={6} />
+      ) : Object.keys(groupedProducts).length > 0 ? (
         Object.entries(groupedProducts).map(([category, products]) => (
           <div key={category} className="category-section">
             <h2 className="category-title">{category}</h2>
@@ -174,11 +290,14 @@ export default function ProductsSection({ selectedCategory: propSelectedCategory
               {products.map((product) => (
                 <div key={product.id} className="product-card">
                   <div className="product-image">
-                    <img 
+                    <Image 
                       src={product.image} 
                       alt={product.name}
-                      onError={(e) => {
-                        e.target.src = '/logo.png';
+                      width={150}
+                      height={150}
+                      style={{ objectFit: 'cover' }}
+                      onError={() => {
+                        // Fallback handled by Next.js Image component
                       }}
                     />
                   </div>
@@ -188,6 +307,9 @@ export default function ProductsSection({ selectedCategory: propSelectedCategory
                       <FontAwesomeIcon icon={faClock} />
                       <span>{product.preparationTime}</span>
                     </div>
+                    <div className="product-price">
+                      {product.price} {t('riyal')}
+                    </div>
                     <div className="product-actions">
                       <button 
                         className="add-to-cart-btn"
@@ -195,13 +317,6 @@ export default function ProductsSection({ selectedCategory: propSelectedCategory
                       >
                         <FontAwesomeIcon icon={faPlus} />
                         {t('addToCart')}
-                      </button>
-                      <button 
-                        className="call-waiter-btn"
-                        onClick={handleCallWaiter}
-                      >
-                        <FontAwesomeIcon icon={faBell} />
-                        {t('callWaiterBtn')}
                       </button>
                     </div>
                   </div>
@@ -217,15 +332,32 @@ export default function ProductsSection({ selectedCategory: propSelectedCategory
       )}
 
       {/* زر السلة */}
-      <button 
-        className="cart-button"
-        onClick={() => window.location.href = '/cart'}
-      >
-        <FontAwesomeIcon icon={faShoppingCart} />
-        {getCartCount() > 0 && (
-          <span className="cart-count">{getCartCount()}</span>
-        )}
-      </button>
+      <Link href="/cart">
+        <button className="cart-button">
+          <FontAwesomeIcon icon={faShoppingCart} />
+          {getCartCount() > 0 && (
+            <span className="cart-count">{getCartCount()}</span>
+          )}
+        </button>
+      </Link>
+
+      {/* زر استدعاء النادل */}
+      <Link href="/call-waiter">
+        <button 
+          className="call-waiter-fixed-btn"
+          title={t('callWaiter')}
+        >
+          <FontAwesomeIcon icon={faBell} />
+        </button>
+      </Link>
+
+      {/* Product Modal */}
+      <ProductModal
+        product={modalProduct}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onAddToCart={handleModalAddToCart}
+      />
     </div>
   );
 } 

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faBell, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faBell, faCheck, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/contexts/ToastContext';
 import Navbar from '@/components/Navbar/Navbar';
@@ -83,6 +83,9 @@ export default function CallWaiter() {
                 className={`table-button ${selectedTable === tableNumber ? 'selected' : ''}`}
                 onClick={() => handleTableSelect(tableNumber)}
               >
+                <div className="table-icon">
+                  <FontAwesomeIcon icon={faUtensils} />
+                </div>
                 <span className="table-number">{tableNumber}</span>
                 {selectedTable === tableNumber && (
                   <div className="selected-indicator">
