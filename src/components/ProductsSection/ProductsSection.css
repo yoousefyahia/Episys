@@ -155,7 +155,7 @@
 .product-image {
   width: 150px !important;
   height: 150px !important;
-  border-radius: 50% !important;
+  border-radius: 12px !important;
   overflow: hidden !important;
   margin: 1rem auto !important;
   position: relative !important;
@@ -166,8 +166,9 @@
 .product-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s ease;
+  background-color: #f8f9fa;
 }
 
 .product-card:hover .product-image img {

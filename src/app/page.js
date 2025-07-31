@@ -36,9 +36,9 @@ export default function Home() {
         <Navbar />
         <Carousel
           slides={[
-            { image: '/images/p2.webp', title: 'MasterCard' },
-            { image: '/images/p3.jpg', title: 'InstaPay' },
-            { image: '/images/p1.jpg', title: 'Visa' },
+            { image: '/images/Banner1.png', title: 'banner1' },
+            { image: '/images/banner2.png', title: 'banner2' },
+            { image: '/images/banner3.png', title: 'banner3' },
           ]}
         />
         <CategoriesCarousel

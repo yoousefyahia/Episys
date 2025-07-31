@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useRef } from 'react';
 import Toast from '@/components/Toast/Toast';
 import { useLanguage } from './LanguageContext';
 
@@ -17,9 +17,10 @@ export const useToast = () => {
 export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
   const { language } = useLanguage();
+  const toastIdRef = useRef(0);
 
   const showToast = (message, type = 'success', duration = 1000) => {
-    const id = Date.now() + Math.random();
+    const id = ++toastIdRef.current;
     const newToast = { id, message, type, duration };
 
     setToasts(prev => [...prev, newToast]);

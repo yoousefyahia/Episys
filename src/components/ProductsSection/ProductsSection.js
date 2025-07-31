@@ -33,7 +33,7 @@ const getProductsData = t => [
     id: 1,
     name: t('burger'),
     category: t('mainDishes'),
-    image: '/images/p1.jpg',
+    image: '/images/beef.webp',
     preparationTime: `15 ${t('minutes')}`,
     price: 45,
     sizes: [
@@ -54,7 +54,7 @@ const getProductsData = t => [
     id: 2,
     name: t('pizza'),
     category: t('mainDishes'),
-    image: '/images/p2.webp',
+    image: '/images/pizza.jfif',
     preparationTime: `20 ${t('minutes')}`,
     price: 55,
     sizes: [
@@ -75,7 +75,7 @@ const getProductsData = t => [
     id: 3,
     name: t('orangeJuice'),
     category: t('coldDrinks'),
-    image: '/images/p3.jpg',
+    image: '/images/orang.jfif',
     preparationTime: `3 ${t('minutes')}`,
     price: 18,
     sizes: [
@@ -93,7 +93,7 @@ const getProductsData = t => [
     id: 4,
     name: t('cappuccino'),
     category: t('hotDrinks'),
-    image: '/images/p1.jpg',
+    image: '/images/cappichino.jfif',
     preparationTime: `5 ${t('minutes')}`,
     price: 25,
     sizes: [
@@ -112,7 +112,7 @@ const getProductsData = t => [
     id: 5,
     name: t('espresso'),
     category: t('hotDrinks'),
-    image: '/images/p2.webp',
+    image: '/images/esprsso.jfif',
     preparationTime: `3 ${t('minutes')}`,
     price: 20,
     sizes: [
@@ -129,7 +129,7 @@ const getProductsData = t => [
     id: 6,
     name: t('latte'),
     category: t('hotDrinks'),
-    image: '/images/p3.jpg',
+    image: '/images/latte.avif',
     preparationTime: `6 ${t('minutes')}`,
     price: 28,
     sizes: [
@@ -148,7 +148,7 @@ const getProductsData = t => [
     id: 7,
     name: t('mocha'),
     category: t('hotDrinks'),
-    image: '/images/p1.jpg',
+    image: '/images/mocha.jfif',
     preparationTime: `7 ${t('minutes')}`,
     price: 30,
     sizes: [
@@ -167,7 +167,7 @@ const getProductsData = t => [
     id: 8,
     name: t('croissant'),
     category: t('pastries'),
-    image: '/images/p2.webp',
+    image: '/images/croissant.jfif',
     preparationTime: `2 ${t('minutes')}`,
     price: 12,
     addons: [
@@ -180,7 +180,7 @@ const getProductsData = t => [
     id: 9,
     name: t('cheesecake'),
     category: t('desserts'),
-    image: '/images/p3.jpg',
+    image: '/images/Cheesecake.jfif',
     preparationTime: `5 ${t('minutes')}`,
     price: 22,
     addons: [
@@ -193,7 +193,7 @@ const getProductsData = t => [
     id: 10,
     name: t('chocolateCake'),
     category: t('desserts'),
-    image: '/images/p1.jpg',
+    image: '/images/Chocolate Cake.jfif',
     preparationTime: `5 ${t('minutes')}`,
     price: 25,
     addons: [
@@ -209,7 +209,7 @@ export default function ProductsSection({
 }) {
   const { t, language } = useLanguage();
   const { addToCart, getCartCount, cartItems } = useCart();
-  const { success } = useToast();
+  const { showToast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [modalProduct, setModalProduct] = useState(null);
@@ -221,24 +221,21 @@ export default function ProductsSection({
     setIsClient(true);
   }, []);
 
+  const products = getProductsData(t);
+
   // فلترة المنتجات حسب البحث والفئة
   useEffect(() => {
     if (!isClient) return;
 
-    const productsData = getProductsData(t);
-    let filtered = productsData;
+    let filtered = products;
 
     if (propSelectedCategory && propSelectedCategory !== t('allProducts')) {
-      filtered = filtered.filter(
-        product => product.category === propSelectedCategory
-      );
+      filtered = products.filter(product => product.category === propSelectedCategory);
     }
 
     if (searchTerm.trim()) {
-      filtered = filtered.filter(
-        product =>
-          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          product.category.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(product =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -289,7 +286,7 @@ export default function ProductsSection({
     const message = language === 'ar' 
       ? `تم تحديث كمية ${product.name} إلى ${newQuantity}`
       : `${product.name} quantity updated to ${newQuantity}`;
-    success(message);
+    showToast(message);
   };
 
   const handleCallWaiter = () => {
@@ -309,9 +306,9 @@ export default function ProductsSection({
         language === 'ar'
           ? `تم إضافة ${productWithOptions.name} إلى السلة`
           : `${productWithOptions.name} added to cart`;
-      success(message);
+      showToast(message);
     },
-    [addToCart, language, success]
+    [addToCart, language, showToast]
   );
 
   const handleCloseModal = useCallback(() => {
@@ -355,9 +352,20 @@ export default function ProductsSection({
                         alt={product.name}
                         width={150}
                         height={150}
-                        style={{ objectFit: 'cover' }}
-                        onError={() => {
-                          // Fallback handled by Next.js Image component
+                        style={{ 
+                          objectFit: 'contain',
+                          width: '100%',
+                          height: '100%',
+                          borderRadius: '12px',
+                          backgroundColor: '#f8f9fa'
+                        }}
+                        onError={(e) => {
+                          console.error('Image failed to load:', product.image);
+                          // Fallback to a placeholder or default image
+                          e.target.src = '/images/logo.jpg';
+                        }}
+                        onLoad={() => {
+                          console.log('Image loaded successfully:', product.image);
                         }}
                       />
                     </div>

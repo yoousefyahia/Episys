@@ -66,6 +66,8 @@ function Carousel({ slides }) {
             height={400}
             className="carousel__img"
             style={{ objectFit: 'cover' }}
+            priority={current === 0} // إضافة priority للصورة الأولى (LCP)
+            sizes="(max-width: 768px) 100vw, 800px"
           />
         ) : (
           <div className="carousel__img carousel__img--placeholder"></div>

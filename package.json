@@ -9,7 +9,10 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "clean": "rm -rf .next && rm -rf node_modules/.cache",
+    "clean:all": "rm -rf .next && rm -rf node_modules && npm install",
+    "dev:clean": "npm run clean && npm run dev"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.0.0",

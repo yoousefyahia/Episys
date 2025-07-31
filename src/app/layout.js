@@ -22,7 +22,6 @@ export const metadata = {
     'نظام إدارة المطاعم  - طلب طعام سريع وآمن | Advanced restaurant management system - fast and secure food ordering',
   keywords: 'مطعم، طعام، طلب، عربة تسوق، EPISYS، restaurant, food, order, cart',
   authors: [{ name: 'EPISYS Team' }],
-  viewport: 'width=device-width, initial-scale=1',
   icons: {
     icon: '/logo.jpg',
     shortcut: '/logo.jpg',
@@ -43,12 +42,19 @@ export const metadata = {
   },
 };
 
+// إضافة viewport export منفصل (مطلوب في Next.js 15)
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning={true}>
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#11998e" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -59,15 +65,14 @@ export default function RootLayout({ children }) {
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              // إيقاف Service Worker مؤقتاً لحل مشكلة الكاش
               if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                      console.log('SW registered: ', registration);
-                    })
-                    .catch(function(registrationError) {
-                      console.log('SW registration failed: ', registrationError);
-                    });
+                // إزالة جميع Service Workers
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                  for(let registration of registrations) {
+                    registration.unregister();
+                    console.log('SW unregistered temporarily');
+                  }
                 });
               }
             `,
