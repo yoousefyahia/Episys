@@ -66,8 +66,9 @@
 .product-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s ease;
+  background-color: #f8f9fa;
 }
 
 .product-image:hover img {

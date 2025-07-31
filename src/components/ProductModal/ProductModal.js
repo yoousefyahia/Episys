@@ -104,7 +104,11 @@ export default function ProductModal({
                 alt={product.name}
                 width={60}
                 height={60}
-                style={{ objectFit: 'cover' }}
+                style={{ 
+                  objectFit: 'contain',
+                  backgroundColor: '#f8f9fa',
+                  borderRadius: '8px'
+                }}
               />
             </div>
             <div className="product-details">
