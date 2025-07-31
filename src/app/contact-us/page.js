@@ -6,4 +6,4 @@ export default function ContactUsPage() {
       <ContactUs />
     </div>
   );
-} 
+}

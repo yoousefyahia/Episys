@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -56,13 +56,16 @@ button {
 }
 
 /* إعدادات للإدخال */
-input, textarea, select {
+input,
+textarea,
+select {
   outline: none;
   border: none;
 }
 
 /* إعدادات للقوائم */
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 

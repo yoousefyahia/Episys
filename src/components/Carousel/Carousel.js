@@ -1,7 +1,10 @@
 'use client';
 import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import '../Carousel/Carousel.css';
 
@@ -11,11 +14,11 @@ function Carousel({ slides }) {
   const dragging = useRef(false);
 
   // سحب بالماوس أو التاتش
-  const handleDragStart = (e) => {
+  const handleDragStart = e => {
     dragging.current = true;
     startX.current = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
   };
-  const handleDragMove = (e) => {
+  const handleDragMove = e => {
     if (!dragging.current) return;
     const x = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
     if (startX.current - x > 50) {
@@ -30,9 +33,11 @@ function Carousel({ slides }) {
     dragging.current = false;
   };
 
-  const goTo = (idx) => setCurrent(idx);
-  const prev = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  const next = () => setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  const goTo = idx => setCurrent(idx);
+  const prev = () =>
+    setCurrent(prev => (prev === 0 ? slides.length - 1 : prev - 1));
+  const next = () =>
+    setCurrent(prev => (prev === slides.length - 1 ? 0 : prev + 1));
 
   return (
     <div
@@ -45,14 +50,18 @@ function Carousel({ slides }) {
       onTouchMove={handleDragMove}
       onTouchEnd={handleDragEnd}
     >
-      <button className="carousel__arrow left" onClick={prev} aria-label="السابق">
+      <button
+        className="carousel__arrow left"
+        onClick={prev}
+        aria-label="السابق"
+      >
         <FontAwesomeIcon icon={faChevronLeft} />
       </button>
       <div className="carousel__slide">
         {slides.length > 0 && slides[current].image ? (
           <Image
             src={slides[current].image}
-            alt={slides[current].title || `slide-${current+1}`}
+            alt={slides[current].title || `slide-${current + 1}`}
             width={800}
             height={400}
             className="carousel__img"
@@ -62,14 +71,20 @@ function Carousel({ slides }) {
           <div className="carousel__img carousel__img--placeholder"></div>
         )}
       </div>
-      <button className="carousel__arrow right" onClick={next} aria-label="التالي">
+      <button
+        className="carousel__arrow right"
+        onClick={next}
+        aria-label="التالي"
+      >
         <FontAwesomeIcon icon={faChevronRight} />
       </button>
       <div className="carousel__indicators">
         {slides.map((_, idx) => (
           <button
             key={idx}
-            className={"carousel__indicator" + (idx === current ? " active" : "")}
+            className={
+              'carousel__indicator' + (idx === current ? ' active' : '')
+            }
             onClick={() => goTo(idx)}
             aria-label={`اذهب للسلايد رقم ${idx + 1}`}
           />
@@ -79,4 +94,4 @@ function Carousel({ slides }) {
   );
 }
 
-export default Carousel; 
+export default Carousel;

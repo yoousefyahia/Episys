@@ -8,11 +8,17 @@ import 'swiper/css/navigation';
 import './CategoriesCarousel.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faUtensils,faBreadSlice,faCakeCandles,faMugHot,faBottleWater,
-  faListUl} from '@fortawesome/free-solid-svg-icons';
+import {
+  faUtensils,
+  faBreadSlice,
+  faCakeCandles,
+  faMugHot,
+  faBottleWater,
+  faListUl,
+} from '@fortawesome/free-solid-svg-icons';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const getCategories = (t) => [
+const getCategories = t => [
   { label: t('allProducts'), icon: faListUl, value: t('allProducts') },
   { label: t('mainDishes'), icon: faUtensils, value: t('mainDishes') },
   { label: t('coldDrinks'), icon: faBottleWater, value: t('coldDrinks') },
@@ -21,7 +27,10 @@ const getCategories = (t) => [
   { label: t('desserts'), icon: faCakeCandles, value: t('desserts') },
 ];
 
-export default function CategoriesCarousel({ onCategorySelect, selectedCategory }) {
+export default function CategoriesCarousel({
+  onCategorySelect,
+  selectedCategory,
+}) {
   const { t, language } = useLanguage();
   const [isClient, setIsClient] = useState(false);
 
@@ -31,7 +40,10 @@ export default function CategoriesCarousel({ onCategorySelect, selectedCategory 
 
   if (!isClient) {
     return (
-      <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="categories-container">
+      <div
+        dir={language === 'ar' ? 'rtl' : 'ltr'}
+        className="categories-container"
+      >
         <div className="categories-header">
           <h2 className="categories-title">{t('productCategories')}</h2>
           <div className="categories-underline" />
@@ -41,7 +53,10 @@ export default function CategoriesCarousel({ onCategorySelect, selectedCategory 
   }
 
   return (
-    <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="categories-container">
+    <div
+      dir={language === 'ar' ? 'rtl' : 'ltr'}
+      className="categories-container"
+    >
       <div className="categories-header">
         <h2 className="categories-title">{t('productCategories')}</h2>
         <div className="categories-underline" />

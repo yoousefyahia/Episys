@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faBell, faCheck, faUtensils } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowLeft,
+  faBell,
+  faCheck,
+  faUtensils,
+} from '@fortawesome/free-solid-svg-icons';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/contexts/ToastContext';
 import Navbar from '@/components/Navbar/Navbar';
@@ -23,7 +28,7 @@ export default function CallWaiter() {
     window.history.back();
   };
 
-  const handleTableSelect = (tableNumber) => {
+  const handleTableSelect = tableNumber => {
     setSelectedTable(tableNumber);
   };
 
@@ -33,7 +38,6 @@ export default function CallWaiter() {
     }
 
     setIsCalling(true);
-    
 
     setTimeout(() => {
       setIsCalling(false);
@@ -57,7 +61,10 @@ export default function CallWaiter() {
   const tables = Array.from({ length: 20 }, (_, i) => i + 1);
 
   return (
-    <div className="call-waiter-container" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+    <div
+      className="call-waiter-container"
+      dir={language === 'ar' ? 'rtl' : 'ltr'}
+    >
       <Navbar />
       <div className="call-waiter-content-wrapper">
         <div className="call-waiter-header">
@@ -77,7 +84,7 @@ export default function CallWaiter() {
           </div>
 
           <div className="tables-grid">
-            {tables.map((tableNumber) => (
+            {tables.map(tableNumber => (
               <button
                 key={tableNumber}
                 className={`table-button ${selectedTable === tableNumber ? 'selected' : ''}`}
@@ -119,7 +126,8 @@ export default function CallWaiter() {
           {selectedTable && (
             <div className="selected-table-info">
               <p className="selected-table-text">
-                {t('selectedTable')}: <span className="table-number-highlight">{selectedTable}</span>
+                {t('selectedTable')}:{' '}
+                <span className="table-number-highlight">{selectedTable}</span>
               </p>
             </div>
           )}
@@ -127,4 +135,4 @@ export default function CallWaiter() {
       </div>
     </div>
   );
-} 
+}

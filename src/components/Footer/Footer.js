@@ -1,11 +1,11 @@
 'use client';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faFacebook, 
-  faTwitter, 
-  faInstagram, 
-  faYoutube 
+import {
+  faFacebook,
+  faTwitter,
+  faInstagram,
+  faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Image from 'next/image';
@@ -23,23 +23,21 @@ export default function Footer() {
             {/* معلومات عنا */}
             <div className="footer-column">
               <h3 className="footer-title">{t('aboutUs')}</h3>
-              <p className="footer-description">
-                {t('aboutUsDescription')}
-              </p>
-                             <div className="social-media">
-                 <a href="#" className="social-icon youtube">
-                   <FontAwesomeIcon icon={faYoutube} />
-                 </a>
-                 <a href="#" className="social-icon instagram">
-                   <FontAwesomeIcon icon={faInstagram} />
-                 </a>
-                 <a href="#" className="social-icon twitter">
-                   <FontAwesomeIcon icon={faTwitter} />
-                 </a>
-                 <a href="#" className="social-icon facebook">
-                   <FontAwesomeIcon icon={faFacebook} />
-                 </a>
-               </div>
+              <p className="footer-description">{t('aboutUsDescription')}</p>
+              <div className="social-media">
+                <a href="#" className="social-icon youtube">
+                  <FontAwesomeIcon icon={faYoutube} />
+                </a>
+                <a href="#" className="social-icon instagram">
+                  <FontAwesomeIcon icon={faInstagram} />
+                </a>
+                <a href="#" className="social-icon twitter">
+                  <FontAwesomeIcon icon={faTwitter} />
+                </a>
+                <a href="#" className="social-icon facebook">
+                  <FontAwesomeIcon icon={faFacebook} />
+                </a>
+              </div>
             </div>
 
             {/* فروعنا */}
@@ -53,18 +51,38 @@ export default function Footer() {
             {/* طرق الدفع */}
             <div className="footer-column">
               <h3 className="footer-title">{t('paymentMethods')}</h3>
-                                           <div className="payment-methods">
+              <div className="payment-methods">
                 <div className="payment-logo">
-                  <Image src="/images/mastercard.png" alt="Mastercard" width={40} height={25} />
+                  <Image
+                    src="/images/mastercard.png"
+                    alt="Mastercard"
+                    width={40}
+                    height={25}
+                  />
                 </div>
                 <div className="payment-logo">
-                  <Image src="/images/visa.png" alt="VISA" width={40} height={25} />
+                  <Image
+                    src="/images/visa.png"
+                    alt="VISA"
+                    width={40}
+                    height={25}
+                  />
                 </div>
                 <div className="payment-logo">
-                  <Image src="/images/vodafone.jfif" alt="Vodafone Cash" width={40} height={25} />
+                  <Image
+                    src="/images/vodafone.jfif"
+                    alt="Vodafone Cash"
+                    width={40}
+                    height={25}
+                  />
                 </div>
                 <div className="payment-logo">
-                  <Image src="/images/instapay.png" alt="Instapay" width={40} height={25} />
+                  <Image
+                    src="/images/instapay.png"
+                    alt="Instapay"
+                    width={40}
+                    height={25}
+                  />
                 </div>
               </div>
             </div>
@@ -109,4 +127,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-} 
+}

@@ -36,23 +36,64 @@ export const CartProvider = ({ children }) => {
     }
   }, [cartItems, isClient]);
 
-  const addToCart = (product) => {
+  // Generate unique ID for cart items with different options
+  const generateCartItemId = (product) => {
+    const sizeId = product.selectedSize?.id || 'default';
+    const addonsIds = product.selectedAddons?.map(addon => `${addon.id}:${addon.quantity || 1}`).sort().join(',') || 'none';
+    const notesHash = product.notes ? btoa(unescape(encodeURIComponent(product.notes))).slice(0, 8) : 'none';
+    return `${product.id}-${sizeId}-${addonsIds}-${notesHash}`;
+  };
+
+  const addToCart = product => {
     setCartItems(prev => {
-      const existingItem = prev.find(item => item.id === product.id);
+      // Generate unique ID for this specific product configuration
+      const cartItemId = generateCartItemId(product);
+      
+      const existingItem = prev.find(item => {
+        const itemId = generateCartItemId(item);
+        return itemId === cartItemId;
+      });
+
       if (existingItem) {
-        return prev.map(item =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
+        return prev.map(item => {
+          const itemId = generateCartItemId(item);
+          if (itemId === cartItemId) {
+            return { 
+              ...item, 
+              quantity: item.quantity + (product.quantity || 1),
+              totalPrice: (item.totalPrice || item.price * item.quantity) + (product.totalPrice || product.price * (product.quantity || 1))
+            };
+          }
+          return item;
+        });
       } else {
-        return [...prev, { ...product, quantity: 1 }];
+        return [...prev, { 
+          ...product, 
+          quantity: product.quantity || 1,
+          totalPrice: product.totalPrice || product.price * (product.quantity || 1)
+        }];
       }
     });
   };
 
-  const removeFromCart = (productId) => {
+  const removeFromCart = productId => {
     setCartItems(prev => prev.filter(item => item.id !== productId));
+  };
+
+  const removeFromCartById = (productId, selectedSize = null, selectedAddons = [], notes = '') => {
+    setCartItems(prev => {
+      return prev.filter(item => {
+        const itemSizeId = item.selectedSize?.id || 'default';
+        const itemAddonsIds = item.selectedAddons?.map(addon => `${addon.id}:${addon.quantity || 1}`).sort().join(',') || 'none';
+        const itemNotesHash = item.notes ? btoa(unescape(encodeURIComponent(item.notes))).slice(0, 8) : 'none';
+        
+        const targetSizeId = selectedSize?.id || 'default';
+        const targetAddonsIds = selectedAddons?.map(addon => `${addon.id}:${addon.quantity || 1}`).sort().join(',') || 'none';
+        const targetNotesHash = notes ? btoa(unescape(encodeURIComponent(notes))).slice(0, 8) : 'none';
+        
+        return !(item.id === productId && itemSizeId === targetSizeId && itemAddonsIds === targetAddonsIds && itemNotesHash === targetNotesHash);
+      });
+    });
   };
 
   const updateQuantity = (productId, newQuantity) => {
@@ -60,13 +101,21 @@ export const CartProvider = ({ children }) => {
       removeFromCart(productId);
       return;
     }
-    
+
     setCartItems(prev =>
-      prev.map(item =>
-        item.id === productId
-          ? { ...item, quantity: newQuantity }
-          : item
-      )
+      prev.map(item => {
+        if (item.id === productId) {
+          const basePrice = item.selectedSize?.price || item.price;
+          const addonsPrice = item.selectedAddons?.reduce((sum, addon) => sum + (addon.price || 0), 0) || 0;
+          const unitPrice = basePrice + addonsPrice;
+          return { 
+            ...item, 
+            quantity: newQuantity,
+            totalPrice: unitPrice * newQuantity
+          };
+        }
+        return item;
+      })
     );
   };
 
@@ -75,7 +124,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const getCartTotal = () => {
-    return cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    return cartItems.reduce((sum, item) => sum + (item.totalPrice || item.price * item.quantity), 0);
   };
 
   const getCartCount = () => {
@@ -86,15 +135,12 @@ export const CartProvider = ({ children }) => {
     cartItems,
     addToCart,
     removeFromCart,
+    removeFromCartById,
     updateQuantity,
     clearCart,
     getCartTotal,
-    getCartCount
+    getCartCount,
   };
 
-  return (
-    <CartContext.Provider value={value}>
-      {children}
-    </CartContext.Provider>
-  );
-}; 
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+};

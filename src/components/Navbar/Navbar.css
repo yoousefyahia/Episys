@@ -9,7 +9,7 @@
   justify-content: space-between;
   padding: 14px 18px 14px 18px;
   background: #fff;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
   font-family: 'Segoe UI', Arial, sans-serif;
   flex-wrap: nowrap;
   overflow-x: visible !important;
@@ -96,7 +96,7 @@
   position: fixed;
   min-width: 140px;
   background: #d1c5c5;
-  box-shadow: 0 6px 24px 0 rgba(0,0,0,0.10);
+  box-shadow: 0 6px 24px 0 rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   margin-top: 4px;
   z-index: 3000;
@@ -112,7 +112,7 @@
   right: 0;
   min-width: 100%;
   background: #fff;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   margin-top: 8px;
   z-index: 3000;
@@ -194,7 +194,7 @@
 .mobile-dropdown .navbar__location-option:not(.selected):hover {
   background: #f8f9fa;
   transform: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .navbar__links {
@@ -301,7 +301,7 @@
   cursor: pointer;
 }
 .navbar__cart:hover {
-  background: rgb(37, 26, 87)
+  background: rgb(37, 26, 87);
 }
 
 .navbar__cart-icon {
@@ -326,10 +326,16 @@
   border: 2px solid #fff;
 }
 
-.navbar__hide-mobile { display: flex; }
-.navbar__show-mobile { display: none; }
+.navbar__hide-mobile {
+  display: flex;
+}
+.navbar__show-mobile {
+  display: none;
+}
 @media (max-width: 800px) {
-  .navbar__hide-mobile { display: none !important; }
+  .navbar__hide-mobile {
+    display: none !important;
+  }
   .navbar__show-mobile {
     display: flex !important;
     background: none;
@@ -354,7 +360,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.12);
+  background: rgba(0, 0, 0, 0.12);
   z-index: 10000;
   display: flex;
   justify-content: flex-end;
@@ -365,16 +371,22 @@
   width: 92vw;
   max-width: 420px;
   height: 100vh;
-  box-shadow: -2px 0 16px 0 rgba(0,0,0,0.08);
+  box-shadow: -2px 0 16px 0 rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   padding: 24px 18px 18px 18px;
   position: relative;
-  animation: navbarDrawerIn 0.22s cubic-bezier(.4,1.3,.6,1) both;
+  animation: navbarDrawerIn 0.22s cubic-bezier(0.4, 1.3, 0.6, 1) both;
 }
 @keyframes navbarDrawerIn {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .navbar__drawer-header {
@@ -532,7 +544,8 @@
   .navbar__links li {
     font-size: 1rem;
   }
-  .navbar__location-btn, .navbar__call-waiter {
+  .navbar__location-btn,
+  .navbar__call-waiter {
     font-size: 1rem;
     padding: 7px 12px;
   }
@@ -562,7 +575,8 @@
   .navbar__links li {
     font-size: 0.85rem;
   }
-  .navbar__location-btn, .navbar__call-waiter {
+  .navbar__location-btn,
+  .navbar__call-waiter {
     font-size: 0.85rem;
     padding: 5px 7px;
   }
@@ -575,4 +589,4 @@
     height: 8px;
     font-size: 0.5rem;
   }
-} 
+}

@@ -223,26 +223,120 @@
 .addon-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 6px;
-  transition: background-color 0.2s;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+  transition: all 0.2s;
 }
 
 .addon-item:hover {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.addon-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.addon-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.addon-price {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.addon-quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  border-radius: 6px;
+  padding: 0.25rem;
+  border: 1px solid #d1d5db;
+}
+
+.addon-quantity-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.addon-quantity-btn:hover:not(:disabled) {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+.addon-quantity-btn:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.addon-quantity-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Notes Section */
+.notes-input-container {
+  position: relative;
+}
+
+.notes-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.2s;
   background: #f9fafb;
 }
 
-.addon-item input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: #3b82f6;
+.notes-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: white;
 }
 
-.addon-text {
-  font-size: 0.875rem;
-  color: #374151;
+.notes-textarea::placeholder {
+  color: #9ca3af;
+}
+
+.notes-character-count {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.125rem 0.25rem;
+  border-radius: 4px;
 }
 
 /* Footer */
@@ -290,15 +384,15 @@
 }
 
 /* RTL Support */
-[dir="rtl"] .product-info {
+[dir='rtl'] .product-info {
   flex-direction: column;
 }
 
-[dir="rtl"] .modal-footer {
+[dir='rtl'] .modal-footer {
   flex-direction: row-reverse;
 }
 
-[dir="rtl"] .close-btn {
+[dir='rtl'] .close-btn {
   right: auto;
   left: 0.75rem;
 }
@@ -333,6 +427,37 @@
     grid-template-columns: 1fr;
   }
 
+  .addon-item {
+    padding: 0.5rem;
+  }
+
+  .addon-quantity-controls {
+    gap: 0.25rem;
+    padding: 0.125rem;
+  }
+
+  .addon-quantity-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 0.625rem;
+  }
+
+  .addon-quantity-value {
+    font-size: 0.75rem;
+    min-width: 16px;
+  }
+
+  .notes-textarea {
+    min-height: 60px;
+    font-size: 0.8rem;
+  }
+
+  .notes-character-count {
+    font-size: 0.625rem;
+    bottom: 0.25rem;
+    right: 0.5rem;
+  }
+
   .modal-footer {
     flex-direction: column;
     gap: 1rem;
@@ -341,7 +466,6 @@
 
   .add-to-cart-btn {
     width: 100%;
-    
   }
 }
 
@@ -364,8 +488,8 @@
     right: 0.5rem;
   }
 
-  [dir="rtl"] .close-btn {
+  [dir='rtl'] .close-btn {
     right: auto;
     left: 0.5rem;
   }
-} 
+}

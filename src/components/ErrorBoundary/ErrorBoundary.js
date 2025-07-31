@@ -19,7 +19,7 @@ class ErrorBoundary extends React.Component {
     console.error('Error caught by boundary:', error, errorInfo);
     this.setState({
       error: error,
-      errorInfo: errorInfo
+      errorInfo: errorInfo,
     });
   }
 
@@ -35,13 +35,13 @@ class ErrorBoundary extends React.Component {
               حدث خطأ غير متوقع. يرجى تحديث الصفحة أو المحاولة مرة أخرى.
             </p>
             <div className="error-actions">
-              <button 
+              <button
                 className="error-button primary"
                 onClick={() => window.location.reload()}
               >
                 تحديث الصفحة
               </button>
-              <button 
+              <button
                 className="error-button secondary"
                 onClick={() => this.setState({ hasError: false })}
               >
@@ -67,4 +67,4 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-export default ErrorBoundary; 
+export default ErrorBoundary;

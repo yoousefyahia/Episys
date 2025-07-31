@@ -15,11 +15,14 @@ export default function BackToTop() {
       const scrollTop = window.scrollY;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
-      
+
       // Calculate scroll progress (0 to 100)
-      const progress = Math.min((scrollTop / (documentHeight - windowHeight)) * 100, 100);
+      const progress = Math.min(
+        (scrollTop / (documentHeight - windowHeight)) * 100,
+        100
+      );
       setScrollProgress(progress);
-      
+
       // Show button when scrolled down 300px
       setIsVisible(scrollTop > 300);
     };
@@ -33,7 +36,7 @@ export default function BackToTop() {
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
@@ -43,7 +46,7 @@ export default function BackToTop() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   };
 
@@ -51,8 +54,9 @@ export default function BackToTop() {
 
   // Get responsive dimensions based on screen size
   const getResponsiveDimensions = () => {
-    if (typeof window === 'undefined') return { size: 60, radius: 25, center: 30 };
-    
+    if (typeof window === 'undefined')
+      return { size: 60, radius: 25, center: 30 };
+
     if (windowWidth <= 360) return { size: 40, radius: 16, center: 20 };
     if (windowWidth <= 480) return { size: 45, radius: 18, center: 22.5 };
     if (windowWidth <= 768) return { size: 50, radius: 20, center: 25 };
@@ -64,12 +68,16 @@ export default function BackToTop() {
 
   return (
     <div className="back-to-top-container">
-      <button 
+      <button
         className="back-to-top-button"
         onClick={scrollToTop}
         aria-label="العودة إلى أعلى الصفحة"
       >
-        <svg className="progress-ring" width={dimensions.size} height={dimensions.size}>
+        <svg
+          className="progress-ring"
+          width={dimensions.size}
+          height={dimensions.size}
+        >
           <circle
             className="progress-ring-circle-bg"
             stroke="#e0e0e0"
@@ -91,15 +99,12 @@ export default function BackToTop() {
               strokeDasharray: `${2 * Math.PI * dimensions.radius}`,
               strokeDashoffset: `${2 * Math.PI * dimensions.radius * (1 - scrollProgress / 100)}`,
               transform: 'rotate(-90deg)',
-              transformOrigin: `${dimensions.center}px ${dimensions.center}px`
+              transformOrigin: `${dimensions.center}px ${dimensions.center}px`,
             }}
           />
         </svg>
-        <FontAwesomeIcon 
-          icon={faArrowUp} 
-          className="back-to-top-icon"
-        />
+        <FontAwesomeIcon icon={faArrowUp} className="back-to-top-icon" />
       </button>
     </div>
   );
-} 
+}

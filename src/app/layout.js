@@ -1,31 +1,32 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { LanguageProvider } from "@/contexts/LanguageContext";
-import { CartProvider } from "@/contexts/CartContext";
-import { ToastProvider } from "@/contexts/ToastContext";
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
+import { LanguageProvider } from '@/contexts/LanguageContext';
+import { CartProvider } from '@/contexts/CartContext';
+import { ToastProvider } from '@/contexts/ToastContext';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
   display: 'swap',
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
   display: 'swap',
 });
 
 export const metadata = {
   title: 'EPISYS - الصفحة الرئيسية | EPISYS - Home',
-  description: 'نظام إدارة المطاعم المتطور - طلب طعام سريع وآمن | Advanced restaurant management system - fast and secure food ordering',
+  description:
+    'نظام إدارة المطاعم المتطور - طلب طعام سريع وآمن | Advanced restaurant management system - fast and secure food ordering',
   keywords: 'مطعم، طعام، طلب، عربة تسوق، EPISYS، restaurant, food, order, cart',
-  authors: [{ name: "EPISYS Team" }],
-  viewport: "width=device-width, initial-scale=1",
+  authors: [{ name: 'EPISYS Team' }],
+  viewport: 'width=device-width, initial-scale=1',
   icons: {
-    icon: '/images/logo.png',
-    shortcut: '/images/logo.png',
-    apple: '/images/logo.png',
+    icon: '/logo.jpg',
+    shortcut: '/logo.jpg',
+    apple: '/logo.jpg',
   },
   manifest: '/manifest.json',
   openGraph: {
@@ -49,8 +50,8 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
-        <link rel="icon" href="/images/logo.png" />
-        <link rel="apple-touch-icon" href="/images/logo.png" />
+        <link rel="icon" href="/logo.jpg" />
+        <link rel="apple-touch-icon" href="/logo.jpg" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -75,9 +76,7 @@ export default function RootLayout({ children }) {
       >
         <LanguageProvider>
           <CartProvider>
-            <ToastProvider>
-              {children}
-            </ToastProvider>
+            <ToastProvider>{children}</ToastProvider>
           </CartProvider>
         </LanguageProvider>
       </body>

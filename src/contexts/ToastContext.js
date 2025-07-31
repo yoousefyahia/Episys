@@ -21,31 +21,32 @@ export const ToastProvider = ({ children }) => {
   const showToast = (message, type = 'success', duration = 1000) => {
     const id = Date.now() + Math.random();
     const newToast = { id, message, type, duration };
-    
+
     setToasts(prev => [...prev, newToast]);
-    
+
     return id;
   };
 
-  const removeToast = (id) => {
+  const removeToast = id => {
     setToasts(prev => prev.filter(toast => toast.id !== id));
   };
 
-  const success = (message, duration) => showToast(message, 'success', duration);
+  const success = (message, duration) =>
+    showToast(message, 'success', duration);
   const error = (message, duration) => showToast(message, 'error', duration);
 
   const value = {
     showToast,
     removeToast,
     success,
-    error
+    error,
   };
 
   return (
     <ToastContext.Provider value={value}>
       {children}
       <div className="toast-container" dir={language === 'ar' ? 'rtl' : 'ltr'}>
-        {toasts.map((toast) => (
+        {toasts.map(toast => (
           <Toast
             key={toast.id}
             message={toast.message}
@@ -58,4 +59,4 @@ export const ToastProvider = ({ children }) => {
       </div>
     </ToastContext.Provider>
   );
-}; 
+};

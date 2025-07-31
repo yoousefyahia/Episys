@@ -1,17 +1,17 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import "../Navbar/Navbar.css";
-import Image from "next/image";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { useCart } from "@/contexts/CartContext";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import '../Navbar/Navbar.css';
+import Image from 'next/image';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useCart } from '@/contexts/CartContext';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const LOCATIONS = [
-  { name: "degla" },
-  { name: "nasr City" },
-  { name: "alexandria" },
+  { name: 'degla' },
+  { name: 'nasr City' },
+  { name: 'alexandria' },
 ];
 
 function Navbar() {
@@ -27,20 +27,18 @@ function Navbar() {
   const drawerRef = useRef(null);
 
   // Function to check if a link is active
-  const isActive = (path) => {
+  const isActive = path => {
     if (path === '/') {
       return pathname === '/';
     }
     return pathname.startsWith(path);
   };
 
-
-
   const goToHomeAndCloseDrawer = () => {
     setDrawerOpen(false);
   };
 
-  const handleLocationChange = useCallback((newLocation) => {
+  const handleLocationChange = useCallback(newLocation => {
     setSelectedLocation(newLocation);
     setDropdownOpen(false);
     setMobileDropdownOpen(false);
@@ -51,44 +49,39 @@ function Navbar() {
   useEffect(() => {
     function handleClickOutside(event) {
       // Close desktop dropdown
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
       }
-      
+
       // Close mobile dropdown
       if (
         drawerRef.current &&
         !drawerRef.current.contains(event.target) &&
-        !event.target.classList.contains("navbar__hamburger")
+        !event.target.classList.contains('navbar__hamburger')
       ) {
         setMobileDropdownOpen(false);
       }
-      
+
       // Close drawer
       if (
         drawerRef.current &&
         !drawerRef.current.contains(event.target) &&
-        !event.target.classList.contains("navbar__hamburger")
+        !event.target.classList.contains('navbar__hamburger')
       ) {
         setDrawerOpen(false);
       }
     }
-    
+
     if (dropdownOpen || mobileDropdownOpen || drawerOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     } else {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     }
-    
+
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [dropdownOpen, mobileDropdownOpen, drawerOpen]);
-
-
 
   // Close mobile dropdown when drawer closes
   useEffect(() => {
@@ -102,15 +95,21 @@ function Navbar() {
       <nav className="navbar">
         <Link href="/">
           <div className="navbar__logo">
-            <Image src="/images/logo.png" alt="Logo" width={40} height={40} style={{marginRight: 8}} />
+            <Image
+              src="/images/logo.jpg"
+              alt="Logo"
+              width={40}
+              height={40}
+              style={{ marginRight: 8 }}
+            />
             <span className="navbar__brand">EPISYS</span>
           </div>
         </Link>
         <div className="navbar__location navbar__hide-mobile" ref={dropdownRef}>
           <button
             key={`desktop-location-${selectedLocation}`}
-            className={`navbar__location-btn${dropdownOpen ? " active" : ""}`}
-            onClick={() => setDropdownOpen((open) => !open)}
+            className={`navbar__location-btn${dropdownOpen ? ' active' : ''}`}
+            onClick={() => setDropdownOpen(open => !open)}
           >
             <span className="navbar__location-icon">📍</span>
             <span className="location-text">{t(selectedLocation)}</span>
@@ -118,11 +117,11 @@ function Navbar() {
           </button>
           {dropdownOpen && (
             <div className="navbar__location-dropdown">
-              {LOCATIONS.map((loc) => (
+              {LOCATIONS.map(loc => (
                 <button
                   key={loc.name}
                   className={`navbar__location-option${
-                    selectedLocation === loc.name ? " selected" : ""
+                    selectedLocation === loc.name ? ' selected' : ''
                   }`}
                   onClick={() => handleLocationChange(loc.name)}
                 >
@@ -135,23 +134,43 @@ function Navbar() {
         </div>
         <ul className="navbar__links navbar__hide-mobile">
           <Link href="/">
-            <li className={isActive('/') ? 'active' : ''} style={{ cursor: 'pointer' }}>{t('home')}</li>
+            <li
+              className={isActive('/') ? 'active' : ''}
+              style={{ cursor: 'pointer' }}
+            >
+              {t('home')}
+            </li>
           </Link>
           <Link href="/book-table">
-            <li className={isActive('/book-table') ? 'active' : ''} style={{ cursor: 'pointer' }}>{t('bookTable')}</li>
+            <li
+              className={isActive('/book-table') ? 'active' : ''}
+              style={{ cursor: 'pointer' }}
+            >
+              {t('bookTable')}
+            </li>
           </Link>
           <Link href="/about-us">
-            <li className={isActive('/about-us') ? 'active' : ''} style={{ cursor: 'pointer' }}>{t('aboutUs')}</li>
+            <li
+              className={isActive('/about-us') ? 'active' : ''}
+              style={{ cursor: 'pointer' }}
+            >
+              {t('aboutUs')}
+            </li>
           </Link>
           <Link href="/contact-us">
-            <li className={isActive('/contact-us') ? 'active' : ''} style={{ cursor: 'pointer' }}>{t('contactUs')}</li>
+            <li
+              className={isActive('/contact-us') ? 'active' : ''}
+              style={{ cursor: 'pointer' }}
+            >
+              {t('contactUs')}
+            </li>
           </Link>
         </ul>
         <div className="navbar__actions navbar__hide-mobile">
-          <select 
+          <select
             className="navbar__lang-select"
             value={language}
-            onChange={(e) => changeLanguage(e.target.value)}
+            onChange={e => changeLanguage(e.target.value)}
           >
             <option value="en">{t('english')}</option>
             <option value="ar">{t('arabic')}</option>
@@ -184,7 +203,13 @@ function Navbar() {
             <div className="navbar__drawer-header">
               <Link href="/">
                 <div className="navbar__logo">
-                  <Image src="/images/logo.png" alt="Logo" width={40} height={40} style={{marginRight: 8}} />
+                              <Image
+              src="/images/logo.jpg"
+              alt="Logo"
+              width={40}
+              height={40}
+              style={{ marginRight: 8 }}
+            />
                   <span className="navbar__brand">EPISYS</span>
                 </div>
               </Link>
@@ -198,39 +223,73 @@ function Navbar() {
             </div>
             <ul className="navbar__drawer-links">
               <Link href="/">
-                <li className={isActive('/') ? 'active' : ''} onClick={goToHomeAndCloseDrawer} style={{ cursor: 'pointer' }}>{t('home')}</li>
+                <li
+                  className={isActive('/') ? 'active' : ''}
+                  onClick={goToHomeAndCloseDrawer}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {t('home')}
+                </li>
               </Link>
               <Link href="/book-table">
-                <li className={isActive('/book-table') ? 'active' : ''} onClick={() => setDrawerOpen(false)} style={{ cursor: 'pointer' }}>{t('bookTable')}</li>
+                <li
+                  className={isActive('/book-table') ? 'active' : ''}
+                  onClick={() => setDrawerOpen(false)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {t('bookTable')}
+                </li>
               </Link>
               <Link href="/call-waiter">
-                <li className={isActive('/call-waiter') ? 'active' : ''} onClick={() => setDrawerOpen(false)} style={{ cursor: 'pointer' }}>{t('callWaiter')}</li>
+                <li
+                  className={isActive('/call-waiter') ? 'active' : ''}
+                  onClick={() => setDrawerOpen(false)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {t('callWaiter')}
+                </li>
               </Link>
               <Link href="/about-us">
-                <li className={isActive('/about-us') ? 'active' : ''} onClick={() => setDrawerOpen(false)} style={{ cursor: 'pointer' }}>{t('aboutUs')}</li>
+                <li
+                  className={isActive('/about-us') ? 'active' : ''}
+                  onClick={() => setDrawerOpen(false)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {t('aboutUs')}
+                </li>
               </Link>
               <Link href="/contact-us">
-                <li className={isActive('/contact-us') ? 'active' : ''} onClick={() => setDrawerOpen(false)} style={{ cursor: 'pointer' }}>{t('contactUs')}</li>
+                <li
+                  className={isActive('/contact-us') ? 'active' : ''}
+                  onClick={() => setDrawerOpen(false)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {t('contactUs')}
+                </li>
               </Link>
             </ul>
             <div className="navbar__drawer-location">
-              <div className="navbar__location" style={{marginLeft:0}}>
+              <div className="navbar__location" style={{ marginLeft: 0 }}>
                 <button
                   key={`mobile-location-${selectedLocation}-${forceUpdate}`}
-                  className={`navbar__location-btn ${mobileDropdownOpen ? " active" : ""}`}
-                  onClick={() => setMobileDropdownOpen((open) => !open)}
+                  className={`navbar__location-btn ${mobileDropdownOpen ? ' active' : ''}`}
+                  onClick={() => setMobileDropdownOpen(open => !open)}
                 >
                   <span className="navbar__location-icon">📍</span>
                   <span className="location-text">{t(selectedLocation)}</span>
-                  <span className={`navbar__dropdown ${mobileDropdownOpen ? " rotated" : ""}`}>▼</span>
+                  <span
+                    className={`navbar__dropdown ${mobileDropdownOpen ? ' rotated' : ''}`}
+                  >
+                    ▼
+                  </span>
                 </button>
                 {mobileDropdownOpen && (
                   <div className="navbar__location-dropdown mobile-dropdown">
-                    {LOCATIONS.map((loc) => (
+                    {LOCATIONS.map(loc => (
                       <button
                         key={loc.name}
                         className={`navbar__location-option${
-                          selectedLocation === loc.name ? " selected" : ""
+                          selectedLocation === loc.name ? ' selected' : ''
                         }`}
                         onClick={() => handleLocationChange(loc.name)}
                       >
@@ -245,21 +304,27 @@ function Navbar() {
                 )}
               </div>
             </div>
-            <select 
+            <select
               className="navbar__drawer-lang-select"
               value={language}
-              onChange={(e) => changeLanguage(e.target.value)}
+              onChange={e => changeLanguage(e.target.value)}
             >
               <option value="en">{t('english')}</option>
               <option value="ar">{t('arabic')}</option>
             </select>
-            <button className="navbar__drawer-call-waiter" onClick={() => {
-              window.location.href = '/call-waiter';
-              setDrawerOpen(false);
-            }}>
+            <button
+              className="navbar__drawer-call-waiter"
+              onClick={() => {
+                window.location.href = '/call-waiter';
+                setDrawerOpen(false);
+              }}
+            >
               <span className="navbar__bell">🔔</span> {t('callWaiter')}
             </button>
-            <div className="navbar__drawer-cart" onClick={() => window.location.href = '/cart'}>
+            <div
+              className="navbar__drawer-cart"
+              onClick={() => (window.location.href = '/cart')}
+            >
               <span className="navbar__cart-icon">🛒</span>
               <span className="navbar__cart-badge">{getCartCount()}</span>
             </div>
@@ -270,4 +335,4 @@ function Navbar() {
   );
 }
 
-export default Navbar; 
+export default Navbar;

@@ -48,4 +48,4 @@ export const ModalSkeleton = () => (
       <div className="skeleton-section"></div>
     </div>
   </div>
-); 
+);

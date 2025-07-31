@@ -32,7 +32,7 @@ export const LanguageProvider = ({ children }) => {
     }
   }, []);
 
-  const changeLanguage = (newLanguage) => {
+  const changeLanguage = newLanguage => {
     setLanguage(newLanguage);
     if (isClient) {
       localStorage.setItem('language', newLanguage);
@@ -42,7 +42,7 @@ export const LanguageProvider = ({ children }) => {
     }
   };
 
-  const t = (key) => {
+  const t = key => {
     const translations = {
       ar: {
         // Navbar
@@ -52,7 +52,7 @@ export const LanguageProvider = ({ children }) => {
         contactUs: 'اتصل بنا',
         callWaiter: 'استدعاء النادل',
         cart: 'السلة',
-        
+
         // Categories
         allProducts: 'كل المنتجات',
         mainDishes: 'الأطباق الرئيسية',
@@ -61,15 +61,15 @@ export const LanguageProvider = ({ children }) => {
         pastries: 'مخبوزات',
         desserts: 'حلويات',
         productCategories: 'فئات المنتجات',
-        
+
         // Search
         searchPlaceholder: 'ابحث عن منتج...',
         noResults: 'لا توجد منتجات تطابق البحث',
-        
+
         // Product Actions
         addToCart: 'إضافة إلى السلة',
         callWaiterBtn: 'اضغط لاستدعاء النادل !',
-        
+
         // Product Names
         cappuccino: 'كابتشينو كلاسيك',
         espresso: 'إسبريسو',
@@ -81,28 +81,29 @@ export const LanguageProvider = ({ children }) => {
         croissant: 'كرواسون',
         cheesecake: 'تشيز كيك',
         chocolateCake: 'كيك شوكولاتة',
-        
+
         // Time
         minutes: 'دقائق',
-        
+
         // Currency
         riyal: 'ريال',
-        
+
         // Locations
         degla: 'دجلة',
         nasrCity: 'مدينة نصر',
         alexandria: 'الإسكندرية',
-        
+
         // Language
         english: 'English',
         arabic: 'العربية',
-        
+
         // Footer
         aboutUs: 'معلومات عنا',
         ourBranches: 'فروعنا',
         paymentMethods: 'طرق الدفع',
         contactUs: 'تواصل معنا',
-        aboutUsDescription: 'نحن مطعم رائد في تقديم أفضل الأطباق والخدمات المتميزة. نسعى لتقديم تجربة طعام لا تُنسى لعملائنا الكرام.',
+        aboutUsDescription:
+          'نحن مطعم رائد في تقديم أفضل الأطباق والخدمات المتميزة. نسعى لتقديم تجربة طعام لا تُنسى لعملائنا الكرام.',
         viewBranchesLink: 'لمعرفة فروعنا اضغط هنا',
         workingHours: 'نعمل يومياً من 9 صباحاً إلى 12 منتصف الليل',
         trackOrderFromHere: 'تتبع الطلب من هنا',
@@ -110,7 +111,7 @@ export const LanguageProvider = ({ children }) => {
         waiterCalled: 'تم استدعاء النادل!',
         trackOrderClicked: 'تم النقر على تتبع الطلب!',
         cartClicked: 'تم النقر على السلة!',
-        
+
         // Cart
         cart: 'عربة التسوق',
         cartEmptyMessage: 'العربة فارغة! يرجى إضافة منتجات أولاً.',
@@ -128,7 +129,7 @@ export const LanguageProvider = ({ children }) => {
         cartEmpty: 'العربة فارغة!',
         orderPlaced: 'تم تقديم الطلب بنجاح!',
         currency: 'ريال',
-        
+
         // Cart customization
         availableSizes: 'الأحجام المتاحة',
         orderAddons: 'إضافات الطلب',
@@ -141,17 +142,17 @@ export const LanguageProvider = ({ children }) => {
         free: 'مجاني',
         optionalNotes: 'ملاحظات اختيارية',
         addNotesForDish: 'أضف ملاحظات للطبق...',
-        
+
         // Hot Drinks Addons
         extraSugar: 'سكر إضافي',
         lessSugar: 'سكر أقل',
         extraMilk: 'حليب إضافي',
         whippedCream: 'كريمة مخفوقة',
-        
+
         // Cold Drinks Addons
         extraIce: 'ثلج إضافي',
         lessIce: 'ثلج أقل',
-        
+
         // Main Dishes Addons
         extraCheese: 'جبن إضافي',
         extraSauce: 'صوص إضافي',
@@ -159,25 +160,25 @@ export const LanguageProvider = ({ children }) => {
         spicy: 'حار',
         extraMeat: 'لحم إضافي',
         noPickles: 'بدون مخلل',
-        
+
         // Hot Drinks Addons
         extraHot: 'أكثر سخونة',
         lessHot: 'أقل سخونة',
-        
+
         // Pastries Addons
         extraButter: 'زبدة إضافية',
         warmUp: 'تسخين',
         extraJam: 'مربى إضافي',
         extraHoney: 'عسل إضافي',
         freshBaked: 'مخبوز طازج',
-        
+
         // Desserts Addons
         extraCream: 'كريمة إضافية',
         extraChocolate: 'شوكولاتة إضافية',
         lessSweet: 'أقل حلاوة',
         extraNuts: 'مكسرات إضافية',
         extraFruits: 'فواكه إضافية',
-        
+
         // Book Table translations
         selectBookingDetails: 'اختر تفاصيل الحجز',
         selectDate: 'اختر اليوم',
@@ -195,41 +196,46 @@ export const LanguageProvider = ({ children }) => {
         breakfast: 'الإفطار',
         lunch: 'الغداء',
         dinner: 'العشاء',
-        
+
         // About Us translations
         welcomeToOurRestaurant: 'مرحباً بكم في مطعمنا',
-        whereGreatFoodMeetsGoodVibes: 'حيث يلتقي الطعام الرائع مع الأجواء الطيبة',
-        aboutParagraph1: 'مرحباً بكم في مطعمنا، حيث يجتمع الطعام الرائع مع الأجواء الطيبة! نحن مطعم محلي مملوك للعائلة نحب جمع الناس معاً حول وجبات لذيذة ولحظات لا تُنسى. سواء كنت هنا لتناول وجبة سريعة، أو عشاء عائلي، أو احتفال، نحن نهتم بجعل وقتك معنا مميزاً.',
-        aboutParagraph2: 'قائمتنا مليئة بأطباق مصنوعة من مكونات طازجة وعالية الجودة لأننا نؤمن أن الطعام يجب أن يكون لذيذ المذاق كما يجعلك تشعر بالراحة. من أطباقنا المميزة إلى العروض الموسمية، هناك دائماً شيء يثير براعم التذوق لديك.',
-        aboutParagraph3: 'لكننا لسنا فقط عن الطعام - نحن عن المجتمع. نحب رؤية الوجوه المألوفة وترحيب بالجديدة. فريقنا مجموعة مرحة وودية مكرسة لخدمتك بابتسامة والتأكد من أن كل زيارة تشعر وكأنك في المنزل.',
-        aboutParagraph4: 'لذا، تعالوا إلى الداخل، اجلسوا، ودعونا نعتني بالباقي. لا يمكننا الانتظار لمشاركة حبنا للطعام معكم!',
+        whereGreatFoodMeetsGoodVibes:
+          'حيث يلتقي الطعام الرائع مع الأجواء الطيبة',
+        aboutParagraph1:
+          'مرحباً بكم في مطعمنا، حيث يجتمع الطعام الرائع مع الأجواء الطيبة! نحن مطعم محلي مملوك للعائلة نحب جمع الناس معاً حول وجبات لذيذة ولحظات لا تُنسى. سواء كنت هنا لتناول وجبة سريعة، أو عشاء عائلي، أو احتفال، نحن نهتم بجعل وقتك معنا مميزاً.',
+        aboutParagraph2:
+          'قائمتنا مليئة بأطباق مصنوعة من مكونات طازجة وعالية الجودة لأننا نؤمن أن الطعام يجب أن يكون لذيذ المذاق كما يجعلك تشعر بالراحة. من أطباقنا المميزة إلى العروض الموسمية، هناك دائماً شيء يثير براعم التذوق لديك.',
+        aboutParagraph3:
+          'لكننا لسنا فقط عن الطعام - نحن عن المجتمع. نحب رؤية الوجوه المألوفة وترحيب بالجديدة. فريقنا مجموعة مرحة وودية مكرسة لخدمتك بابتسامة والتأكد من أن كل زيارة تشعر وكأنك في المنزل.',
+        aboutParagraph4:
+          'لذا، تعالوا إلى الداخل، اجلسوا، ودعونا نعتني بالباقي. لا يمكننا الانتظار لمشاركة حبنا للطعام معكم!',
         seeYouSoon: 'نراك قريباً!',
-        
-            // Contact Us translations
-    getInTouch: 'تواصل معنا',
-    weAreHereToHelp: 'نحن هنا لمساعدتك',
-    ourAddress: 'عنواننا',
-    restaurantAddress: 'DEGLA PALM COMPOUND MALL06',
-    ourEmail: 'بريدنا الإلكتروني',
-    callUs: 'اتصل بنا',
-    workingHours: 'ساعات العمل',
-    dailyHours: 'نعمل يومياً من 9 صباحاً إلى 12 منتصف الليل',
-    website: 'الموقع الإلكتروني',
-    weLookForwardToHearingFromYou: 'نتطلع لسماع منكم',
-    
-    // Call Waiter translations
-    selectYourTable: 'اختر طاولتك',
-    chooseTableToCallWaiter: 'اختر رقم طاولتك لاستدعاء النادل',
-    selectedTable: 'الطاولة المختارة',
-    callingWaiter: 'جاري استدعاء النادل...',
-    waiterCalledSuccessfully: 'تم استدعاء النادل بنجاح!',
-        
+
+        // Contact Us translations
+        getInTouch: 'تواصل معنا',
+        weAreHereToHelp: 'نحن هنا لمساعدتك',
+        ourAddress: 'عنواننا',
+        restaurantAddress: 'DEGLA PALM COMPOUND MALL06',
+        ourEmail: 'بريدنا الإلكتروني',
+        callUs: 'اتصل بنا',
+        workingHours: 'ساعات العمل',
+        dailyHours: 'نعمل يومياً من 9 صباحاً إلى 12 منتصف الليل',
+        website: 'الموقع الإلكتروني',
+        weLookForwardToHearingFromYou: 'نتطلع لسماع منكم',
+
+        // Call Waiter translations
+        selectYourTable: 'اختر طاولتك',
+        chooseTableToCallWaiter: 'اختر رقم طاولتك لاستدعاء النادل',
+        selectedTable: 'الطاولة المختارة',
+        callingWaiter: 'جاري استدعاء النادل...',
+        waiterCalledSuccessfully: 'تم استدعاء النادل بنجاح!',
+
         // Validation messages
         selectSizeFor: 'يرجى اختيار حجم لـ',
         invalidQuantityFor: 'كمية غير صحيحة لـ',
         invalidTotalPrice: 'السعر الإجمالي غير صحيح',
         notesRequired: 'الملاحظات مطلوبة',
-        
+
         // Toast messages
         productAddedToCart: 'تم إضافة المنتج بنجاح',
         productRemovedFromCart: 'تم إزالة المنتج من السلة',
@@ -238,12 +244,15 @@ export const LanguageProvider = ({ children }) => {
         errorOccurred: 'حدث خطأ',
         success: 'نجح',
         error: 'خطأ',
-        
+
         // Modal
         availableSizes: 'الأحجام المتاحة',
         orderAddons: 'إضافات الطلب',
+        specialNotes: 'ملاحظات خاصة',
+        addSpecialNotes: 'أضف ملاحظات خاصة للمنتج...',
         total: 'المجموع',
-        addToCart: 'إضافة إلى السلة'
+        addToCart: 'إضافة إلى السلة',
+        notes: 'الملاحظات',
       },
       en: {
         // Navbar
@@ -253,7 +262,7 @@ export const LanguageProvider = ({ children }) => {
         contactUs: 'Contact Us',
         callWaiter: 'Call Waiter',
         cart: 'Cart',
-        
+
         // Categories
         allProducts: 'All Products',
         mainDishes: 'Main Dishes',
@@ -262,15 +271,15 @@ export const LanguageProvider = ({ children }) => {
         pastries: 'Pastries',
         desserts: 'Desserts',
         productCategories: 'Product Categories',
-        
+
         // Search
         searchPlaceholder: 'Search for a product...',
         noResults: 'No products match your search',
-        
+
         // Product Actions
         addToCart: 'Add to Cart',
         callWaiterBtn: 'Press to call waiter!',
-        
+
         // Product Names
         cappuccino: 'Classic Cappuccino',
         espresso: 'Espresso',
@@ -282,28 +291,29 @@ export const LanguageProvider = ({ children }) => {
         croissant: 'Croissant',
         cheesecake: 'Cheesecake',
         chocolateCake: 'Chocolate Cake',
-        
+
         // Time
         minutes: 'minutes',
-        
+
         // Currency
         riyal: 'SAR',
-        
+
         // Locations
         degla: 'Degla',
         nasrCity: 'Nasr City',
         alexandria: 'Alexandria',
-        
+
         // Language
         english: 'English',
         arabic: 'العربية',
-        
+
         // Footer
         aboutUs: 'About Us',
         ourBranches: 'Our Branches',
         paymentMethods: 'Payment Methods',
         contactUs: 'Contact Us',
-        aboutUsDescription: 'We are a leading restaurant in providing the best dishes and exceptional services. We strive to offer an unforgettable dining experience for our valued customers.',
+        aboutUsDescription:
+          'We are a leading restaurant in providing the best dishes and exceptional services. We strive to offer an unforgettable dining experience for our valued customers.',
         viewBranchesLink: 'Click here to view our branches',
         workingHours: 'We operate daily from 9 AM to 12 AM',
         trackOrderFromHere: 'Track Order From Here',
@@ -311,7 +321,7 @@ export const LanguageProvider = ({ children }) => {
         waiterCalled: 'Waiter has been called!',
         trackOrderClicked: 'Track order functionality clicked!',
         cartClicked: 'Cart functionality clicked!',
-        
+
         // Cart
         cart: 'Cart',
         cartEmptyMessage: 'Cart is empty! Please add products first.',
@@ -329,7 +339,7 @@ export const LanguageProvider = ({ children }) => {
         cartEmpty: 'Cart is empty!',
         orderPlaced: 'Order placed successfully!',
         currency: 'SAR',
-        
+
         // Cart customization
         availableSizes: 'Available Sizes',
         orderAddons: 'Order Add-ons',
@@ -342,17 +352,17 @@ export const LanguageProvider = ({ children }) => {
         free: 'Free',
         optionalNotes: 'Optional Notes',
         addNotesForDish: 'Add notes for the dish...',
-        
+
         // Hot Drinks Addons
         extraSugar: 'Extra Sugar',
         lessSugar: 'Less Sugar',
         extraMilk: 'Extra Milk',
         whippedCream: 'Whipped Cream',
-        
+
         // Cold Drinks Addons
         extraIce: 'Extra Ice',
         lessIce: 'Less Ice',
-        
+
         // Main Dishes Addons
         extraCheese: 'Extra Cheese',
         extraSauce: 'Extra Sauce',
@@ -360,25 +370,25 @@ export const LanguageProvider = ({ children }) => {
         spicy: 'Spicy',
         extraMeat: 'Extra Meat',
         noPickles: 'No Pickles',
-        
+
         // Hot Drinks Addons
         extraHot: 'Extra Hot',
         lessHot: 'Less Hot',
-        
+
         // Pastries Addons
         extraButter: 'Extra Butter',
         warmUp: 'Warm Up',
         extraJam: 'Extra Jam',
         extraHoney: 'Extra Honey',
         freshBaked: 'Fresh Baked',
-        
+
         // Desserts Addons
         extraCream: 'Extra Cream',
         extraChocolate: 'Extra Chocolate',
         lessSweet: 'Less Sweet',
         extraNuts: 'Extra Nuts',
         extraFruits: 'Extra Fruits',
-        
+
         // Book Table translations
         selectBookingDetails: 'Select your booking details',
         selectDate: 'Select Day',
@@ -396,41 +406,45 @@ export const LanguageProvider = ({ children }) => {
         breakfast: 'Breakfast',
         lunch: 'Lunch',
         dinner: 'Dinner',
-        
+
         // About Us translations
         welcomeToOurRestaurant: 'Welcome to our restaurant',
         whereGreatFoodMeetsGoodVibes: 'where great food meets good vibes',
-        aboutParagraph1: 'Welcome to our restaurant, where great food and good vibes come together! We\'re a local, family-owned spot that loves bringing people together over delicious meals and unforgettable moments. Whether you\'re here for a quick bite, a family dinner, or a celebration, we\'re all about making your time with us special.',
-        aboutParagraph2: 'Our menu is packed with dishes made from fresh, quality ingredients because we believe food should taste as good as it makes you feel. From our signature dishes to seasonal specials, there\'s always something to excite your taste buds.',
-        aboutParagraph3: 'But we\'re not just about the food—we\'re about community. We love seeing familiar faces and welcoming new ones. Our team is a fun, friendly bunch dedicated to serving you with a smile and making sure every visit feels like coming home.',
-        aboutParagraph4: 'So, come on in, grab a seat, and let us take care of the rest. We can\'t wait to share our love of food with you!',
+        aboutParagraph1:
+          "Welcome to our restaurant, where great food and good vibes come together! We're a local, family-owned spot that loves bringing people together over delicious meals and unforgettable moments. Whether you're here for a quick bite, a family dinner, or a celebration, we're all about making your time with us special.",
+        aboutParagraph2:
+          "Our menu is packed with dishes made from fresh, quality ingredients because we believe food should taste as good as it makes you feel. From our signature dishes to seasonal specials, there's always something to excite your taste buds.",
+        aboutParagraph3:
+          "But we're not just about the food—we're about community. We love seeing familiar faces and welcoming new ones. Our team is a fun, friendly bunch dedicated to serving you with a smile and making sure every visit feels like coming home.",
+        aboutParagraph4:
+          "So, come on in, grab a seat, and let us take care of the rest. We can't wait to share our love of food with you!",
         seeYouSoon: 'See you soon!',
-        
-            // Contact Us translations
-    getInTouch: 'Get in Touch',
-    weAreHereToHelp: 'We are here to help',
-    ourAddress: 'Our Address',
-    restaurantAddress: 'DEGLA PALM COMPOUND MALL06',
-    ourEmail: 'Our Email',
-    callUs: 'Call Us',
-    workingHours: 'Working Hours',
-    dailyHours: 'We operate daily from 9 AM to 12 AM',
-    website: 'Website',
-    weLookForwardToHearingFromYou: 'We look forward to hearing from you',
-    
-    // Call Waiter translations
-    selectYourTable: 'Select Your Table',
-    chooseTableToCallWaiter: 'Choose your table number to call a waiter',
-    selectedTable: 'Selected Table',
-    callingWaiter: 'Calling Waiter...',
-    waiterCalledSuccessfully: 'Waiter called successfully!',
-        
+
+        // Contact Us translations
+        getInTouch: 'Get in Touch',
+        weAreHereToHelp: 'We are here to help',
+        ourAddress: 'Our Address',
+        restaurantAddress: 'DEGLA PALM COMPOUND MALL06',
+        ourEmail: 'Our Email',
+        callUs: 'Call Us',
+        workingHours: 'Working Hours',
+        dailyHours: 'We operate daily from 9 AM to 12 AM',
+        website: 'Website',
+        weLookForwardToHearingFromYou: 'We look forward to hearing from you',
+
+        // Call Waiter translations
+        selectYourTable: 'Select Your Table',
+        chooseTableToCallWaiter: 'Choose your table number to call a waiter',
+        selectedTable: 'Selected Table',
+        callingWaiter: 'Calling Waiter...',
+        waiterCalledSuccessfully: 'Waiter called successfully!',
+
         // Validation messages
         selectSizeFor: 'Please select a size for',
         invalidQuantityFor: 'Invalid quantity for',
         invalidTotalPrice: 'Invalid total price',
         notesRequired: 'Notes are required',
-        
+
         // Toast messages
         productAddedToCart: 'added successfully',
         productRemovedFromCart: 'removed from cart',
@@ -439,13 +453,16 @@ export const LanguageProvider = ({ children }) => {
         errorOccurred: 'An error occurred',
         success: 'Success',
         error: 'Error',
-        
+
         // Modal
         availableSizes: 'Available Sizes',
         orderAddons: 'Order Add-ons',
+        specialNotes: 'Special Notes',
+        addSpecialNotes: 'Add special notes for the product...',
         total: 'Total',
-        addToCart: 'Add to Cart'
-      }
+        addToCart: 'Add to Cart',
+        notes: 'Notes',
+      },
     };
 
     return translations[language]?.[key] || key;
@@ -455,7 +472,7 @@ export const LanguageProvider = ({ children }) => {
     language,
     changeLanguage,
     t,
-    isClient
+    isClient,
   };
 
   return (
@@ -463,4 +480,4 @@ export const LanguageProvider = ({ children }) => {
       {children}
     </LanguageContext.Provider>
   );
-}; 
+};

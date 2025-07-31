@@ -96,7 +96,7 @@
     width: 90%;
     max-width: 320px;
   }
-  
+
   .toast {
     min-width: auto;
     max-width: none;
@@ -106,29 +106,29 @@
 }
 
 /* دعم اللغة العربية */
-[dir="rtl"] .toast {
+[dir='rtl'] .toast {
   transform: translateY(-100%);
   border-left: none;
   border-right: 4px solid;
 }
 
-[dir="rtl"] .toast-show {
+[dir='rtl'] .toast-show {
   transform: translateY(0);
 }
 
-[dir="rtl"] .toast-hide {
+[dir='rtl'] .toast-hide {
   transform: translateY(-100%);
 }
 
-[dir="rtl"] .toast-close {
+[dir='rtl'] .toast-close {
   margin-left: 0;
   margin-right: 12px;
 }
 
-[dir="rtl"] .toast-content {
+[dir='rtl'] .toast-content {
   flex-direction: row-reverse;
 }
 
-[dir="rtl"] .toast-message {
+[dir='rtl'] .toast-message {
   text-align: right;
-} 
+}

@@ -5,18 +5,18 @@ const nextConfig = {
     // تحسين الأداء
     optimizePackageImports: ['@fortawesome/react-fontawesome'],
   },
-  
+
   // إعدادات الصور
   images: {
     domains: ['localhost'],
     unoptimized: true,
   },
-  
+
   // إعدادات التطوير
   devIndicators: {
     buildActivity: false,
   },
-  
+
   // إعدادات PWA
   async headers() {
     return [
@@ -52,11 +52,11 @@ const nextConfig = {
       },
     ];
   },
-  
+
   // تحسين الأداء
   compress: true,
   poweredByHeader: false,
-  
+
   // إعدادات التطبيق
   async rewrites() {
     return [

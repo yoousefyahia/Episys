@@ -87,9 +87,15 @@
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .hero-title {
@@ -234,8 +240,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .selected-table-info {
@@ -283,11 +293,11 @@
 }
 
 /* RTL Support */
-[dir="rtl"] .back-button {
+[dir='rtl'] .back-button {
   transform: scaleX(-1);
 }
 
-[dir="rtl"] .selected-indicator {
+[dir='rtl'] .selected-indicator {
   right: auto;
   left: -5px;
 }
@@ -297,66 +307,66 @@
   .call-waiter-container {
     padding: 15px;
   }
-  
+
   .call-waiter-header {
     padding: 15px;
     margin-bottom: 20px;
   }
-  
+
   .call-waiter-title {
     font-size: 24px;
   }
-  
+
   .hero-section {
     padding: 30px 15px;
   }
-  
+
   .hero-icon {
     width: 60px;
     height: 60px;
     font-size: 24px;
   }
-  
+
   .hero-title {
     font-size: 22px;
   }
-  
+
   .hero-subtitle {
     font-size: 16px;
   }
-  
+
   .tables-grid {
     grid-template-columns: repeat(4, 1fr);
     padding: 25px;
   }
-  
+
   .table-button {
     padding: 10px 6px;
     min-height: 60px;
     gap: 6px;
   }
-  
+
   .table-icon {
     font-size: 18px;
   }
-  
+
   .table-number {
     font-size: 16px;
   }
-  
+
   .call-action {
     padding: 25px;
   }
-  
+
   .call-waiter-btn {
     padding: 15px 35px;
     font-size: 16px;
   }
-  
+
   .selected-table-text {
     font-size: 16px;
   }
-  
+
   .table-number-highlight {
     font-size: 18px;
   }
@@ -366,84 +376,84 @@
   .call-waiter-container {
     padding: 10px;
   }
-  
+
   .call-waiter-header {
     padding: 12px;
     gap: 15px;
   }
-  
+
   .call-waiter-title {
     font-size: 20px;
   }
-  
+
   .back-button {
     width: 40px;
     height: 40px;
     font-size: 16px;
   }
-  
+
   .hero-section {
     padding: 25px 12px;
   }
-  
+
   .hero-icon {
     width: 50px;
     height: 50px;
     font-size: 20px;
   }
-  
+
   .hero-title {
     font-size: 20px;
   }
-  
+
   .hero-subtitle {
     font-size: 14px;
   }
-  
+
   .tables-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     padding: 20px;
   }
-  
+
   .table-button {
     padding: 8px 5px;
     min-height: 55px;
     gap: 4px;
   }
-  
+
   .table-icon {
     font-size: 14px;
   }
-  
+
   .table-number {
     font-size: 14px;
   }
-  
+
   .selected-indicator {
     width: 18px;
     height: 18px;
     font-size: 9px;
   }
-  
+
   .call-action {
     padding: 20px;
   }
-  
+
   .call-waiter-btn {
     padding: 12px 30px;
     font-size: 15px;
   }
-  
+
   .selected-table-info {
     padding: 15px;
   }
-  
+
   .selected-table-text {
     font-size: 15px;
   }
-  
+
   .table-number-highlight {
     font-size: 16px;
   }
-} 
+}

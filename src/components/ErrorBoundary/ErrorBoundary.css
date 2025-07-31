@@ -97,11 +97,11 @@
 }
 
 /* RTL Support */
-[dir="rtl"] .error-content {
+[dir='rtl'] .error-content {
   text-align: center;
 }
 
-[dir="rtl"] .error-details {
+[dir='rtl'] .error-details {
   text-align: right;
 }
 
@@ -110,16 +110,16 @@
   .error-boundary {
     padding: 1rem;
   }
-  
+
   .error-content {
     padding: 2rem;
   }
-  
+
   .error-actions {
     flex-direction: column;
   }
-  
+
   .error-button {
     width: 100%;
   }
-} 
+}

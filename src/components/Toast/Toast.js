@@ -2,10 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faExclamationCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheckCircle,
+  faExclamationCircle,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 import './Toast.css';
 
-const Toast = ({ message, type = 'success', duration = 3000, onClose, language = 'en' }) => {
+const Toast = ({
+  message,
+  type = 'success',
+  duration = 3000,
+  onClose,
+  language = 'en',
+}) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -40,14 +50,17 @@ const Toast = ({ message, type = 'success', duration = 3000, onClose, language =
         <FontAwesomeIcon icon={getIcon()} className="toast-icon" />
         <span className="toast-message">{message}</span>
       </div>
-      <button className="toast-close" onClick={() => {
-        setIsVisible(false);
-        setTimeout(() => onClose(), 200);
-      }}>
+      <button
+        className="toast-close"
+        onClick={() => {
+          setIsVisible(false);
+          setTimeout(() => onClose(), 200);
+        }}
+      >
         <FontAwesomeIcon icon={faTimes} />
       </button>
     </div>
   );
 };
 
-export default Toast; 
+export default Toast;
