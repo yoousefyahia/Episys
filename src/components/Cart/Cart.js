@@ -15,6 +15,8 @@ import {
 import Navbar from '@/components/Navbar/Navbar';
 import Link from 'next/link';
 import Image from 'next/image';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import './Cart.css';
 
 export default function Cart() {
@@ -24,6 +26,8 @@ export default function Cart() {
   const [couponCode, setCouponCode] = useState('');
   const [discount, setDiscount] = useState(0);
   const [notes, setNotes] = useState('');
+
+
 
   const getItemTotalPrice = item => {
     if (item.totalPrice) {
@@ -322,12 +326,13 @@ export default function Cart() {
                   </div>
                   <div className="input-group">
                     <label className="input-label">{t('phoneNumber')}</label>
-                    <input
-                      type="tel"
+                    <PhoneInput
+                      international
+                      defaultCountry="EG"
                       placeholder={t('enterPhoneNumber')}
                       value={orderDetails.phoneNumber}
-                      onChange={(e) => updateOrderDetails('phoneNumber', e.target.value)}
-                      className="order-input"
+                      onChange={(value) => updateOrderDetails('phoneNumber', value)}
+                      className="phone-input-component"
                     />
                   </div>
                 </div>
@@ -348,12 +353,13 @@ export default function Cart() {
                   </div>
                   <div className="input-group">
                     <label className="input-label">{t('phoneNumber')}</label>
-                    <input
-                      type="tel"
+                    <PhoneInput
+                      international
+                      defaultCountry="EG"
                       placeholder={t('enterPhoneNumber')}
                       value={orderDetails.phoneNumber}
-                      onChange={(e) => updateOrderDetails('phoneNumber', e.target.value)}
-                      className="order-input"
+                      onChange={(value) => updateOrderDetails('phoneNumber', value)}
+                      className="phone-input-component"
                     />
                   </div>
                   <div className="input-group">
