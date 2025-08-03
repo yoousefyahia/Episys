@@ -15,6 +15,17 @@ export const useCart = () => {
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [orderType, setOrderType] = useState('hall'); // Default to hall
+  const [orderDetails, setOrderDetails] = useState({
+    // Hall details
+    tableNumber: '',
+    
+    // Takeaway details
+    customerName: '',
+    phoneNumber: '',
+    
+    // Delivery details
+    deliveryAddress: '',
+  });
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -34,6 +45,16 @@ export const CartProvider = ({ children }) => {
     if (savedOrderType) {
       setOrderType(savedOrderType);
     }
+
+    // Load order details from localStorage if available
+    const savedOrderDetails = localStorage.getItem('orderDetails');
+    if (savedOrderDetails) {
+      try {
+        setOrderDetails(JSON.parse(savedOrderDetails));
+      } catch (error) {
+        // Silently handle localStorage error
+      }
+    }
   }, []);
 
   // Save cart to localStorage whenever it changes
@@ -49,6 +70,13 @@ export const CartProvider = ({ children }) => {
       localStorage.setItem('orderType', orderType);
     }
   }, [orderType, isClient]);
+
+  // Save order details to localStorage whenever it changes
+  useEffect(() => {
+    if (isClient) {
+      localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+    }
+  }, [orderDetails, isClient]);
 
   // Generate unique ID for cart items with different options
   const generateCartItemId = (product) => {
@@ -141,6 +169,13 @@ export const CartProvider = ({ children }) => {
     setOrderType(newOrderType);
   };
 
+  const updateOrderDetails = (field, value) => {
+    setOrderDetails(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
   const getCartTotal = () => {
     return cartItems.reduce((sum, item) => sum + (item.totalPrice || item.price * item.quantity), 0);
   };
@@ -152,12 +187,14 @@ export const CartProvider = ({ children }) => {
   const value = {
     cartItems,
     orderType,
+    orderDetails,
     addToCart,
     removeFromCart,
     removeFromCartById,
     updateQuantity,
     clearCart,
     updateOrderType,
+    updateOrderDetails,
     getCartTotal,
     getCartCount,
   };

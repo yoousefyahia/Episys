@@ -19,7 +19,7 @@ import './Cart.css';
 
 export default function Cart() {
   const { t, language } = useLanguage();
-  const { cartItems, orderType, removeFromCart, updateQuantity, clearCart, updateOrderType } = useCart();
+  const { cartItems, orderType, orderDetails, removeFromCart, updateQuantity, clearCart, updateOrderType, updateOrderDetails } = useCart();
   const { success, error } = useToast();
   const [couponCode, setCouponCode] = useState('');
   const [discount, setDiscount] = useState(0);
@@ -72,6 +72,32 @@ export default function Cart() {
       errors.push(t('invalidTotalPrice'));
     }
 
+    // Validate order details based on order type
+    if (orderType === 'hall' && !orderDetails.tableNumber) {
+      errors.push(t('tableNumber') + ' ' + t('required'));
+    }
+
+    if (orderType === 'takeaway') {
+      if (!orderDetails.customerName) {
+        errors.push(t('customerName') + ' ' + t('required'));
+      }
+      if (!orderDetails.phoneNumber) {
+        errors.push(t('phoneNumber') + ' ' + t('required'));
+      }
+    }
+
+    if (orderType === 'delivery') {
+      if (!orderDetails.customerName) {
+        errors.push(t('customerName') + ' ' + t('required'));
+      }
+      if (!orderDetails.phoneNumber) {
+        errors.push(t('phoneNumber') + ' ' + t('required'));
+      }
+      if (!orderDetails.deliveryAddress) {
+        errors.push(t('deliveryAddress') + ' ' + t('required'));
+      }
+    }
+
     return errors;
   };
 
@@ -99,6 +125,9 @@ export default function Cart() {
     // سيتم استخدام Link بدلاً من window.location.href
   };
 
+  // Generate table numbers for hall selection
+  const tableNumbers = Array.from({ length: 20 }, (_, i) => i + 1);
+
   return (
     <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="cart-container">
       <Navbar />
@@ -125,9 +154,15 @@ export default function Cart() {
                   <Image
                     src={item.image}
                     alt={item.name}
-                    width={80}
-                    height={80}
-                    style={{ objectFit: 'cover' }}
+                    width={100}
+                    height={100}
+                    style={{ 
+                      objectFit: 'contain',
+                      objectPosition: 'center',
+                      borderRadius: '10px',
+                      width: '100%',
+                      height: '100%'
+                    }}
                   />
                 </div>
                 <div className="item-details">
@@ -243,6 +278,99 @@ export default function Cart() {
             </div>
           </div>
         </div>
+
+        {/* قسم تفاصيل الطلب */}
+        {orderType && (
+          <div className="order-details-section">
+            <div className="section-divider"></div>
+            <div className="order-details-group">
+              <label className="order-details-label">{t('orderDetails')}</label>
+              
+              {/* تفاصيل الصالة */}
+              {orderType === 'hall' && (
+                <div className="order-details-content">
+                  <div className="input-group">
+                    <label className="input-label">{t('tableNumber')}</label>
+                    <select
+                      value={orderDetails.tableNumber}
+                      onChange={(e) => updateOrderDetails('tableNumber', e.target.value)}
+                      className="order-input"
+                    >
+                      <option value="">{t('selectTable')}</option>
+                      {tableNumbers.map(num => (
+                        <option key={num} value={num}>
+                          {t('tableNumber')} {num}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
+
+              {/* تفاصيل التيك أواي */}
+              {orderType === 'takeaway' && (
+                <div className="order-details-content">
+                  <div className="input-group">
+                    <label className="input-label">{t('customerName')}</label>
+                    <input
+                      type="text"
+                      placeholder={t('enterCustomerName')}
+                      value={orderDetails.customerName}
+                      onChange={(e) => updateOrderDetails('customerName', e.target.value)}
+                      className="order-input"
+                    />
+                  </div>
+                  <div className="input-group">
+                    <label className="input-label">{t('phoneNumber')}</label>
+                    <input
+                      type="tel"
+                      placeholder={t('enterPhoneNumber')}
+                      value={orderDetails.phoneNumber}
+                      onChange={(e) => updateOrderDetails('phoneNumber', e.target.value)}
+                      className="order-input"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* تفاصيل التوصيل */}
+              {orderType === 'delivery' && (
+                <div className="order-details-content">
+                  <div className="input-group">
+                    <label className="input-label">{t('customerName')}</label>
+                    <input
+                      type="text"
+                      placeholder={t('enterCustomerName')}
+                      value={orderDetails.customerName}
+                      onChange={(e) => updateOrderDetails('customerName', e.target.value)}
+                      className="order-input"
+                    />
+                  </div>
+                  <div className="input-group">
+                    <label className="input-label">{t('phoneNumber')}</label>
+                    <input
+                      type="tel"
+                      placeholder={t('enterPhoneNumber')}
+                      value={orderDetails.phoneNumber}
+                      onChange={(e) => updateOrderDetails('phoneNumber', e.target.value)}
+                      className="order-input"
+                    />
+                  </div>
+                  <div className="input-group">
+                    <label className="input-label">{t('deliveryAddress')}</label>
+                    <textarea
+                      placeholder={t('enterDeliveryAddress')}
+                      value={orderDetails.deliveryAddress}
+                      onChange={(e) => updateOrderDetails('deliveryAddress', e.target.value)}
+                      className="order-input order-textarea"
+                      rows="3"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* قسم الكوبون */}
         <div className="coupon-section">

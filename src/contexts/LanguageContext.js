@@ -136,6 +136,20 @@ export const LanguageProvider = ({ children }) => {
         takeaway: 'تيك أواي',
         delivery: 'ديلفري',
         selectOrderType: 'اختر نوع الطلب',
+        
+        // Order Details
+        tableNumber: 'رقم الطاولة',
+        selectTable: 'اختر رقم الطاولة',
+        customerName: 'اسم العميل',
+        phoneNumber: 'رقم الهاتف',
+        deliveryAddress: 'عنوان التوصيل',
+        enterCustomerName: 'أدخل اسم العميل',
+        enterPhoneNumber: 'أدخل رقم الهاتف',
+        enterDeliveryAddress: 'أدخل عنوان التوصيل',
+        orderDetails: 'تفاصيل الطلب',
+        hallDetails: 'تفاصيل الصالة',
+        takeawayDetails: 'تفاصيل التيك أواي',
+        deliveryDetails: 'تفاصيل التوصيل',
 
         // Cart customization
         availableSizes: 'الأحجام المتاحة',
@@ -242,6 +256,7 @@ export const LanguageProvider = ({ children }) => {
         invalidQuantityFor: 'كمية غير صحيحة لـ',
         invalidTotalPrice: 'السعر الإجمالي غير صحيح',
         notesRequired: 'الملاحظات مطلوبة',
+        required: 'مطلوب',
 
         // Toast messages
         productAddedToCart: 'تم إضافة المنتج بنجاح',
@@ -359,6 +374,20 @@ export const LanguageProvider = ({ children }) => {
         takeaway: 'Takeaway',
         delivery: 'Delivery',
         selectOrderType: 'Select Order Type',
+        
+        // Order Details
+        tableNumber: 'Table Number',
+        selectTable: 'Select Table Number',
+        customerName: 'Customer Name',
+        phoneNumber: 'Phone Number',
+        deliveryAddress: 'Delivery Address',
+        enterCustomerName: 'Enter customer name',
+        enterPhoneNumber: 'Enter phone number',
+        enterDeliveryAddress: 'Enter delivery address',
+        orderDetails: 'Order Details',
+        hallDetails: 'Hall Details',
+        takeawayDetails: 'Takeaway Details',
+        deliveryDetails: 'Delivery Details',
 
         // Cart customization
         availableSizes: 'Available Sizes',
@@ -464,6 +493,7 @@ export const LanguageProvider = ({ children }) => {
         invalidQuantityFor: 'Invalid quantity for',
         invalidTotalPrice: 'Invalid total price',
         notesRequired: 'Notes are required',
+        required: 'required',
 
         // Toast messages
         productAddedToCart: 'added successfully',
